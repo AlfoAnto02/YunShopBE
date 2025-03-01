@@ -11,6 +11,8 @@ namespace Model.Context {
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
         public MyDbContext() : base () { }
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

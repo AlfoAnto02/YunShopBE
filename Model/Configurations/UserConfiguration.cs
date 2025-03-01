@@ -32,7 +32,7 @@ namespace Model.Configurations {
 
             builder.Property(u => u.Password)
                 .HasColumnName("Password")
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsRequired();
 
             builder.Property(u => u.Role)
@@ -45,8 +45,6 @@ namespace Model.Configurations {
 
             builder.Property(u => u.CreatedAt)
                 .HasColumnName("Creation_Date")
-                // Se vuoi usare solo la parte di data, in EF Core 6+ puoi usare DateOnly.
-                // Altrimenti, con DateTime, specifica il tipo SQL "date" per memorizzare solo la data.
                 .HasColumnType("date");
 
             builder.Property(u => u.UpdatedAt)

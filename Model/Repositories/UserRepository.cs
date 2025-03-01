@@ -13,5 +13,10 @@ namespace Model.Repositories {
         public async Task<User> GetByEmail(string email) {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
         }
+
+        public async Task<User> GetById(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
     }
 }
