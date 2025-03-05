@@ -27,7 +27,7 @@ export class SignInComponent {
     this.usersService.postLoginUser(this.email, this.password)
       .subscribe({
         next: response => {
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('token', response.Token);
           console.log('Login successful:', localStorage.getItem('token'));
           this.router.navigateByUrl('').then(() => {
             window.location.reload();

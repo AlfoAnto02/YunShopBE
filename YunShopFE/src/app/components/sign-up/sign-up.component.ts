@@ -11,8 +11,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class SignUpComponent {
   username: string = '';
-  password: string = '';
   email:string = '';
+  password: string = '';
+  phoneNumber: string = '';
 
   constructor(private router: Router, private usersService : UserService) {}
 
@@ -25,7 +26,7 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    this.usersService.postRegisterUser(this.username, this.email, this.password)
+    this.usersService.postRegisterUser(this.username, this.email, this.password, this.phoneNumber)
       .subscribe(
         (response: any) => {
           console.log('Registrazione avvenuta con successo:', response);

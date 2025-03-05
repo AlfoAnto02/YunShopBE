@@ -9,28 +9,17 @@ import { addUserRequest } from '../user';
   providedIn: 'root'
 })
 export class UserService {
-PostLoginUrl = `${environment.baseURL}/api/User/Login`;
-PostRegisterUrl = `${environment.baseURL}/api/User/AddUser`;
-PutUpdateUserUrl = `${environment.baseURL}/api/User/UpdateUser`;
+  PostLoginUrl = `${environment.baseURL}/v1/User/login`;
+  PostRegisterUrl = `${environment.baseURL}/v1/User/register`;
 
   constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
 
-  postRegisterUser(username: string, email: string, password: string) {
-    return this.httpClient.post(this.PostRegisterUrl, { username, email, password });
+  postRegisterUser(username: string, email: string, password: string, phoneNumber: string) {
+    return this.httpClient.post(this.PostRegisterUrl, { username, email, password, phoneNumber });
   }
 
   postLoginUser(email: string, password: string): Observable<any> {
     return this.httpClient.post(this.PostLoginUrl, { email, password });
-  }
-
-  PutUpdateUser(id: number, addUserRequest: addUserRequest) {
-    const updateUserRequest = {
-      id: id,
-      addUserRequest: addUserRequest
-    };
-
-    console.log('Update user request:', updateUserRequest);
-    return this.httpClient.put(this.PutUpdateUserUrl, updateUserRequest);
   }
   
   isAuthenticated(): boolean {
