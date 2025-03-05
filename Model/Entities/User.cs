@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Model.Entities {
@@ -17,5 +18,7 @@ namespace Model.Entities {
         public string Role { get; set; }
         public int Cart_Id { get; set; }
         public string Session_Id {get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Category> CategoryCreated { get; set; }
     }
 }

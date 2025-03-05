@@ -20,12 +20,16 @@ namespace YunShopBE {
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext")));
             builder.Services.AddScoped<UserRepository>();
+            builder.Services.AddScoped<CategoryRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.Configure<HashingOptions>(builder.Configuration.GetSection("HashingOptions"));
             builder.Services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new() { Title = "YunShopBE", Version = "v1" });
             });
             builder.Services.AddScoped<ITokenService, TokenService>();
+
+            builder.Services.Configure<JwtAuthenticationOption>(builder.Configuration.GetSection("JwtAuthentication"));
 
             var app = builder.Build();
 
