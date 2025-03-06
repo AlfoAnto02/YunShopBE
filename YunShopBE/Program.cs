@@ -1,9 +1,12 @@
 
 
+using System.Text;
 using Application.Abstractions;
 using Application.Options;
 using Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Model.Context;
 using Model.Repositories;
 
@@ -30,6 +33,37 @@ namespace YunShopBE {
             builder.Services.AddScoped<ITokenService, TokenService>();
 
             builder.Services.Configure<JwtAuthenticationOption>(builder.Configuration.GetSection("JwtAuthentication"));
+
+            var jwtAuthenticationOption = new JwtAuthenticationOption();
+            builder.Configuration.GetSection("JwtAuthentication").Bind(jwtAuthenticationOption);
+            builder.Services.AddAuthentication(options => {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options => {
+                    string key = jwtAuthenticationOption.Key;
+                    var securityKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(key)
+                    );
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters() {
+                        ValidateIssuer = true,
+                        ValidateLifetime = true,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtAuthenticationOption.Issuer,
+                        IssuerSigningKey = securityKey
+                    };
+                });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
 
             var app = builder.Build();
 

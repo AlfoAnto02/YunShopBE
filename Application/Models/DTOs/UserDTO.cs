@@ -11,12 +11,14 @@ namespace Application.Models.DTOs {
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
 
         public UserDTO(User user) {
             Id = user.Id;
             UserName = user.Username;
             Email = user.Email;
             Password = user.Password;
+            Role = user.Role;
         }
     }
 }
