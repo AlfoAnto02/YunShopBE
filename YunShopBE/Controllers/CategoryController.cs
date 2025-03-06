@@ -29,6 +29,7 @@ namespace YunShopBE.Controllers {
             }
         }
         [HttpGet("getAll")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetCategories() {
             try {
                 var categories = await _categoryService.GetAllAsync();
@@ -39,6 +40,7 @@ namespace YunShopBE.Controllers {
             }
         }
         [HttpGet("getById")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetCategoryById(int id) {
             try {
                 var category = await _categoryService.GetAsync(id);
