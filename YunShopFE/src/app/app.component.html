@@ -16,17 +16,10 @@
     <div class="navbar-links mx-auto">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white nav-link-animation" routerLink="/Apparels">Apparels</a>
+          <a class="nav-link text-white nav-link-animation" routerLink="">Products</a>
         </li>
-        <li class="nav-item dropdown" style="margin-left: 40px;"> <!-- Aggiunto il dropdown -->
-          <a class="nav-link text-white nav-link-animation dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item">Category</a>
-            </li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-link-animation" routerLink="/Categories">Categories</a>
         </li>
       </ul>
     </div>
@@ -42,16 +35,16 @@
     <!-- Div per i bottoni -->
     <div class="navbar-buttons">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuthenticated">
           <a class="nav-link btn-signup nav-link-animation" routerLink="/SignUp">Sign Up</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="isAuthenticated">
           <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Username
+            {{ user.username }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="userDropdown">
             <li><a class="dropdown-item" routerLink="/Profile">Profile</a></li>
-            <li><a class="dropdown-item" href="">Logout</a></li>
+            <li><a class="dropdown-item" (click)="logout()" href="">Logout</a></li>
           </ul>
         </li>
       </ul>

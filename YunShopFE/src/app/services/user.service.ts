@@ -3,23 +3,22 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
-import { addUserRequest } from '../user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  PostLoginUrl = `${environment.baseURL}/v1/User/login`;
-  PostRegisterUrl = `${environment.baseURL}/v1/User/register`;
+  LoginUrl = `${environment.baseURL}/User/login`;
+  RegisterUrl = `${environment.baseURL}/User/register`;
 
   constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
 
   postRegisterUser(username: string, email: string, password: string, phoneNumber: string) {
-    return this.httpClient.post(this.PostRegisterUrl, { username, email, password, phoneNumber });
+    return this.httpClient.post(this.RegisterUrl, { username, email, password, phoneNumber });
   }
 
   postLoginUser(email: string, password: string): Observable<any> {
-    return this.httpClient.post(this.PostLoginUrl, { email, password });
+    return this.httpClient.post(this.LoginUrl, { email, password });
   }
   
   isAuthenticated(): boolean {

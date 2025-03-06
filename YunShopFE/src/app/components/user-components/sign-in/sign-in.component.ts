@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -27,6 +27,7 @@ export class SignInComponent {
     this.usersService.postLoginUser(this.email, this.password)
       .subscribe({
         next: response => {
+          console.log('Login successful:', response);
           localStorage.setItem('token', response.Token);
           console.log('Login successful:', localStorage.getItem('token'));
           this.router.navigateByUrl('').then(() => {

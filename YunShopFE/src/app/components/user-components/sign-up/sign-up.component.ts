@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ export class SignUpComponent {
   username: string = '';
   email:string = '';
   password: string = '';
-  phoneNumber: string = '';
+  phone: string = '';
 
   constructor(private router: Router, private usersService : UserService) {}
 
@@ -26,7 +26,7 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    this.usersService.postRegisterUser(this.username, this.email, this.password, this.phoneNumber)
+    this.usersService.postRegisterUser(this.username, this.email, this.password, this.phone)
       .subscribe(
         (response: any) => {
           console.log('Registrazione avvenuta con successo:', response);
