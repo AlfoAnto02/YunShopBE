@@ -3,12 +3,15 @@ using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
 using Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entities;
 
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ControllerBase {
         public readonly ICategoryService _categoryService;
         public CategoryController(ICategoryService categoryService) {
