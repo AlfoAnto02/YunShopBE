@@ -49,5 +49,16 @@ namespace YunShopBE.Controllers {
                 return BadRequest(ResponseFactory.WithError(e));
             }
         }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest deleteCategoryRequest) {
+            try {
+                await _categoryService.DeleteAsync(deleteCategoryRequest);
+                return Ok(ResponseFactory.WithSuccess("Category Deleted!"));
+            }
+            catch (Exception e) {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+        }
     }
 }

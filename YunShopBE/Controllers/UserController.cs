@@ -50,6 +50,20 @@ namespace YunShopBE.Controllers {
         catch (Exception e) {
             return BadRequest(ResponseFactory.WithError(e));
         }
-}
+        }
+
+        [HttpGet("getbyid/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try {
+                var user = await _userService.GetAsync(id);
+                return Ok(ResponseFactory.WithSuccess(new UserResponse() {
+                    User = new UserDTO(user)
+                }));
+            }
+            catch (Exception e) {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+        }
     }
 }
