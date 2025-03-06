@@ -30,9 +30,8 @@ export class SignInComponent {
           console.log('Login successful:', response);
           localStorage.setItem('token', response.Token);
           console.log('Login successful:', localStorage.getItem('token'));
-          this.router.navigateByUrl('').then(() => {
-            window.location.reload();
-          });
+          this.router.navigateByUrl('')
+          //.then(() => {window.location.reload();});
         },
         error: error => {
           console.error('Error logging in:', error);

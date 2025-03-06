@@ -46,9 +46,9 @@ export class AppComponent implements AfterViewInit {
 
   search(query: string): void {
     if (query.trim()) {
-      this.router.navigate(['/Apparels/Search', query]);
+      this.router.navigate(['/Products/Search', query]);
     } else {
-      this.router.navigate(['/Apparels']);
+      this.router.navigate(['/Products']);
     }
   }
 

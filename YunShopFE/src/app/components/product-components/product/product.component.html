@@ -1,1 +1,26 @@
-<p>product works!</p>
+<!-- Product Component -->
+<div class="col mb-5">
+    <div class="card h-100 border-0 shadow-sm">
+        <!-- Product image -->
+        <img class="card-img-top" [src]="product.imageUrl" alt="{{product.name}}" />
+        
+        <!-- Product details -->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name -->
+                <h5 class="fw-bolder text-dark">{{product.name}}</h5>
+                <!-- Product price -->
+                <h6 class="text-muted">${{product.price}}</h6>
+            </div>
+        </div>
+        
+        <!-- Product actions -->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <!-- View Details button -->
+                <a [routerLink]="['/Products/Product', product.id]" class="btn btn-outline-primary mt-auto">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+

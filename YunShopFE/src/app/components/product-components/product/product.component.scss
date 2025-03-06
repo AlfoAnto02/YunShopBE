@@ -1,0 +1,44 @@
+/* Bottoni più stretti e avvicinati al testo */
+.btn-outline-primary {
+    border-color: #8a4dff; /* Viola */
+    color: #8a4dff;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 5px;  /* Rettangolare */
+    padding: 8px 20px;   /* Ridotto il padding per renderli più stretti */
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #8a4dff; /* Viola di sfondo */
+    color: white;
+    border-color: #8a4dff;
+    transform: translateY(-3px); /* Effetto di spostamento */
+}
+
+.btn-outline-primary:focus {
+    outline: none;
+    box-shadow: 0 0 5px #8a4dff;
+}
+
+/* Avvicinare il bottone al testo */
+.card-footer .text-center {
+    margin: 0px; /* Ridotto lo spazio tra il testo e il bottone */
+}
+
+/* Ridurre il padding-bottom nel card-body */
+.card-body.p-4 {
+    padding-bottom: 5px !important; /* Aggiusta il valore come preferisci */
+}
+
+/* Impostare dimensioni fisse per le immagini delle card */
+.card-img-top {
+    width: 100%;         /* Larghezza del 100% del contenitore */
+    height: 250px;       /* Altezza fissa */
+    object-fit: cover;   /* Ritaglia l'immagine per adattarla senza distorsioni */
+}
+
+/* Aggiungere overflow: hidden al contenitore dell'immagine per evitare che sfori */
+.card {
+    overflow: hidden;    /* Nascondi qualsiasi parte dell'immagine che esca */
+}
