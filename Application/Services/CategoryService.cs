@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Abstractions;
+using Application.Models.Request;
 using Model.Entities;
 using Model.Repositories;
 
@@ -41,6 +42,20 @@ namespace Application.Services {
             }
 
             return category;
+        }
+
+        public async Task DeleteAsync(DeleteCategoryRequest deleteRequest) {
+            var category = await this._categoryRepository.GetByName(deleteRequest.Name);
+            if (category == null) {
+                throw new Exception("Category " + deleteRequest.Name + " does not exist");
+            }
+
+            if (this._userRepository.GetById(deleteRequest.UserId).Result.Role != "Admin")
+            {
+                throw new Exception("UnAuthorized");
+            }
+            this._categoryRepository.Delete(category);
+            await this._categoryRepository.SaveChangesAsync();
         }
     }
 }
