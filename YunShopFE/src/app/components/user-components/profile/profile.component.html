@@ -7,19 +7,13 @@
         <!-- Campo Username -->
         <div class="input-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" [(ngModel)]="username">
+          <input type="text" id="username" name="username" [(ngModel)]="username" [disabled]="!isEditable">
         </div>
   
         <!-- Campo Email -->
         <div class="input-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" [(ngModel)]="email">
-        </div>
-
-        <!-- Campo Phone Number -->
-        <div class="input-group">
-          <label for="phone">Phone Number</label>
-          <input type="phone" id="phone" name="phone" [(ngModel)]="phone">
+          <input type="email" id="email" name="email" [(ngModel)]="email" [disabled]="!isEditable">
         </div>
       </div>
     </div>

@@ -16,8 +16,8 @@ export class NewCategoryComponent {
   name: string = '';
   currentUserId: number = 0;
   addCategoryRequest: addCategoryRequest = {
-    name: '',
-    addedById: 0
+    Name: '',
+    AddedBy: 0
   };
 
   
@@ -31,24 +31,26 @@ export class NewCategoryComponent {
     const token = this.TokenService.getToken();
     if (token) {
       const decodedPayload = this.TokenService.decodeToken(token);
-      console.log('Decoded token payload:', decodedPayload);
       this.currentUserId = decodedPayload.user_id;
     }
   }
 
-  createAddCategoryRequest(): addCategoryRequest {
-    return {
-      name: this.name,
-      addedById: this.currentUserId
+  createAddCategoryRequest(): void {
+    this.addCategoryRequest =
+    {
+      Name: this.name,
+      AddedBy: this.currentUserId
     };
   }
   
   onSubmit() {
+    this.createAddCategoryRequest()
     this.CategoriesService.addCategory(this.addCategoryRequest)
     .subscribe({
       next: response => {
         console.log('Category created successfully:', response);
         this.router.navigate(['/Categories']);
+        this.close()
       },
       error: error => {
         console.error('Error creating category:', error);

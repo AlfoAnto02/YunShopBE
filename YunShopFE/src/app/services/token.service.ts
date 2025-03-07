@@ -34,4 +34,14 @@ export class TokenService {
     }
     return true;
   }
+
+  getUserIdByToken(): number {
+    const decodedPayload = this.getDecodedToken();
+    console.log('Decoded payload:', decodedPayload);
+    if (!decodedPayload) {
+      console.error('Invalid token');
+      ;
+    }
+    return decodedPayload.user_id;
+  }
 }

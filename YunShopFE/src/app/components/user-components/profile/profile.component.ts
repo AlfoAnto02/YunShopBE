@@ -18,8 +18,7 @@ export class ProfileComponent implements OnInit {
   username: string = '';
   email: string = '';
   password: string = '';
-  phone: string = '';
-  id: number = 0;
+  isEditable: boolean = false;
 
   constructor(private router: Router, private tokenService: TokenService) {}
 
@@ -33,21 +32,11 @@ export class ProfileComponent implements OnInit {
       const decodedPayload = this.tokenService.decodeToken(token);
       this.user = decodedPayload;
 
-      this.username = this.user.Username;
-      this.email = this.user.Email;
-      this.id = this.user.Id;
-      this.phone = this.user.Phone;
+      this.username = this.user.username;
+      this.email = this.user.email;
 
       console.log('User profile loaded:', this.user);
     }
-  }
-
-  resetProfile(): void {
-    this.user = null;
-    this.username = '';
-    this.email = '';
-    this.password = '';
-    this.id = 0;
   }
 
   close(): void {

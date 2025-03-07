@@ -10,6 +10,7 @@ import { TokenService } from './token.service';
 export class UserService {
   LoginUrl = `${environment.baseURL}/User/login`;
   RegisterUrl = `${environment.baseURL}/User/register`;
+  GetUserByIdUrl = `${environment.baseURL}/User/getbyid`;
 
   constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
 
@@ -19,6 +20,10 @@ export class UserService {
 
   postLoginUser(email: string, password: string): Observable<any> {
     return this.httpClient.post(this.LoginUrl, { email, password });
+  }
+
+  getUserById(id: number): Observable<any> {
+    return this.httpClient.get(`${this.GetUserByIdUrl}/${id}`);
   }
   
   isAuthenticated(): boolean {

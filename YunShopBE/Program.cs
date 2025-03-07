@@ -74,7 +74,8 @@ namespace YunShopBE {
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+
             app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthorization();

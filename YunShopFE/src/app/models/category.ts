@@ -5,6 +5,11 @@ export interface Category {
 }
 
 export interface addCategoryRequest {
+    Name: string;
+    AddedBy: number;
+}
+
+export interface deleteCategoryRequest {
     name: string;
-    addedById: number;
+    userId: number;
 }

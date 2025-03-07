@@ -27,11 +27,11 @@ export class SignInComponent {
     this.usersService.postLoginUser(this.email, this.password)
       .subscribe({
         next: response => {
-          console.log('Login successful:', response);
-          localStorage.setItem('token', response.Token);
-          console.log('Login successful:', localStorage.getItem('token'));
+          console.log('Login successful:', response.result);
+          localStorage.setItem('token', response.result.token);
+          console.log('stored token:', localStorage.getItem('token'));
           this.router.navigateByUrl('')
-          //.then(() => {window.location.reload();});
+          .then(() => {window.location.reload();});
         },
         error: error => {
           console.error('Error logging in:', error);

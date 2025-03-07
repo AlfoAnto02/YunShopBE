@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { TokenService } from './token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Category } from '../models/category';
+import { Category, deleteCategoryRequest } from '../models/category';
 import { addCategoryRequest } from '../models/category';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class CategoriesService {
   GetCategoriesUrl = `${environment.baseURL}/Category/getAll`;
   GetCategoryByIdUrl = `${environment.baseURL}/Category/getById`;
   AddCategoryUrl = `${environment.baseURL}/Category/add`;
+  DeleteCategoryByNameUrl = `${environment.baseURL}/Category/delete`;
 
   constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
 
@@ -32,7 +33,15 @@ export class CategoriesService {
 
   addCategory(addCategoryRequest : addCategoryRequest): Observable<Category> {
 
-    return this.httpClient.post<Category>(this.AddCategoryUrl, addCategoryRequest)
+    return this.httpClient.post<Category>(this.AddCategoryUrl, addCategoryRequest )
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  deleteCategory(deleteCategoryRequest : deleteCategoryRequest): Observable<Category> {
+
+    return this.httpClient.delete<Category>(this.DeleteCategoryByNameUrl, { body: deleteCategoryRequest })
       .pipe(
         catchError(this.handleError)
       );

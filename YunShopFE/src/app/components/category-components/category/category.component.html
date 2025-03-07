@@ -4,7 +4,7 @@
     <h5 class="fw-bolder text-dark me-3 mb-0">{{ category.name }}</h5>
     
     <!-- Added by -->
-    <span class="text-muted me-auto">Added by: {{ category.addedById }}</span>
+    <span class="text-muted me-auto">Added by: {{ addedByUsername }}</span>
     
     <!-- Delete button -->
     <button class="btn btn-danger" (click)="deleteCategory()">Delete</button>
