@@ -41,6 +41,7 @@ namespace Model.Configurations {
                 .WithMany(c => c.CategoryCreated)
                 .HasForeignKey(c => c.AddedById);
 
+
         }
         
     }

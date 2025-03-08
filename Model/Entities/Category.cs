@@ -15,5 +15,7 @@ namespace Model.Entities {
         public DateTime UpdatedAt { get; set; }
         [JsonIgnore]
         public virtual User AddedBy { get; set; }
+        [JsonIgnore]
+        public virtual List<Product> Products { get; set; } = new List<Product>();
     }
 }

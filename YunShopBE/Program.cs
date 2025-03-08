@@ -24,8 +24,12 @@ namespace YunShopBE {
             builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext")));
             builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<CategoryRepository>();
+            builder.Services.AddScoped<ImageRepository>();
+            builder.Services.AddScoped<ProductRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.Configure<HashingOptions>(builder.Configuration.GetSection("HashingOptions"));
             builder.Services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new() { Title = "YunShopBE", Version = "v1" });
@@ -66,7 +70,7 @@ namespace YunShopBE {
             });
 
             var app = builder.Build();
-            app.UseCors();
+            app.UseCors("AllowSpecificOrigin");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment()) {

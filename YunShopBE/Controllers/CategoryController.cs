@@ -11,7 +11,7 @@ using Model.Entities;
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoryController : ControllerBase {
         public readonly ICategoryService _categoryService;
         public CategoryController(ICategoryService categoryService) {
@@ -33,7 +33,8 @@ namespace YunShopBE.Controllers {
         public async Task<IActionResult> GetCategories() {
             try {
                 var categories = await _categoryService.GetAllAsync();
-                return Ok(ResponseFactory.WithSuccess(categories));
+                var categoriesDTOs = categories.Select(c => new CategoryDTO(c)).ToList();
+                return Ok(ResponseFactory.WithSuccess(categoriesDTOs));
             }
             catch (Exception e) {
                 return BadRequest(ResponseFactory.WithError(e));
