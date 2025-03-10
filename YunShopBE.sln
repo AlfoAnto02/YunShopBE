@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunShopBE", "YunShopBE\YunShopBE.csproj", "{85533FD3-3A58-4F93-AB90-5BB5DE068862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YunShopBE", "YunShopBE\YunShopBE.csproj", "{85533FD3-3A58-4F93-AB90-5BB5DE068862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{6225DA1E-8A17-4A3F-80FA-48ABA89FE7CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{6225DA1E-8A17-4A3F-80FA-48ABA89FE7CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{745D6FFD-4975-4732-94BE-A2E3DA5E8BF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{745D6FFD-4975-4732-94BE-A2E3DA5E8BF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientApp", "ClientApp", "{48064F01-B9D7-4E93-B473-CA20409E11ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

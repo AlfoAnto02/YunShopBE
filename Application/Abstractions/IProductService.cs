@@ -7,5 +7,7 @@ using Model.Entities;
 
 namespace Application.Abstractions {
     public interface IProductService : GeneralService<Product> {
+        Task DeleteAsync(int productId, int userId);
+        Task UpdateAsync(int productId, Product product);
     }
 }

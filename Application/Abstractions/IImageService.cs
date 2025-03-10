@@ -7,5 +7,7 @@ using Model.Entities;
 
 namespace Application.Abstractions {
     public interface IImageService : GeneralService<Image> {
+        public void CheckImages(IEnumerable<Image> images);
+        public Task DeleteAsync(int id);
     }
 }
