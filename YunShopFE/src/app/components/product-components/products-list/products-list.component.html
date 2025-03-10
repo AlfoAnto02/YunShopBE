@@ -1,0 +1,17 @@
+<section class="category-section">
+    <!-- Bottone per aggiungere una nuova categoria -->
+    <div class="add-category-container">
+        <button class="btn-add-category" routerLink="/New-Product">
+            + Add Product
+        </button>
+    </div>
+
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div *ngFor="let product of products">
+                <app-product [product]="product"></app-product>
+            </div>
+        </div>
+    </div>
+  </section>
+  

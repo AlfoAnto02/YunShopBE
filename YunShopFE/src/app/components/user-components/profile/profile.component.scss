@@ -1,0 +1,122 @@
+/* Overlay per il popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Sfondo semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Contenitore della finestra modale */
+  .modal-content {
+    background: #ffffff; /* Bianco per la finestra modale */
+    padding: 40px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra per il contenitore */
+  }
+  
+  /* Pulsante per chiudere la finestra modale */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #8a4dff; /* Colore del pulsante di chiusura */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #ff4c4c; /* Colore rosso chiaro al passaggio del mouse */
+  }
+  
+  /* Titolo del profilo */
+  h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #8a4dff; /* Colore viola per il titolo */
+    font-weight: bold;
+  }
+  
+  /* Stile per ogni gruppo di input */
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: #f9f9f9; /* Colore di sfondo grigio chiaro */
+    color: #555; /* Colore del testo */
+    transition: border-color 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    border-color: #8a4dff; /* Colore viola al focus */
+    background-color: #ffffff; /* Sfondo bianco al focus */
+  }
+  
+  /* Sezione Profilo */
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Modifica l'aspetto degli input disabilitati */
+  .input-group input[disabled] {
+    background-color: #e6e6e6; /* Colore di sfondo per gli input disabilitati */
+    border-color: #ccc; /* Colore del bordo più chiaro per gli input disabilitati */
+    color: #777; /* Colore del testo più chiaro */
+    cursor: not-allowed; /* Cambia il cursore per far capire che non è modificabile */
+  }
+  
+  /* Pulsante di modifica (Edit Profile) */
+  .submit-btn {
+    background-color: #8a4dff; /* Colore di sfondo viola */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #7e3de1; /* Colore viola scuro al passaggio del mouse */
+  }
+  
+  .submit-btn:active {
+    background-color: #5c2b9f; /* Colore ancora più scuro quando cliccato */
+  }
+  
+  /* Transizioni morbide per l'intero componente */
+  .modal-content,
+  .input-group input,
+  .submit-btn {
+    transition: all 0.3s ease;
+  }
+  

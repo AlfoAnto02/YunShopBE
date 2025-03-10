@@ -72,6 +72,7 @@ namespace YunShopBE {
             var app = builder.Build();
             app.UseCors("AllowSpecificOrigin");
 
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment()) {
                 app.UseSwagger();
@@ -79,6 +80,8 @@ namespace YunShopBE {
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthorization();
 
