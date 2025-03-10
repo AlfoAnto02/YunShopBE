@@ -51,7 +51,8 @@ namespace Model.Configurations {
                 .HasForeignKey(p => p.CategoryId);
             builder.HasMany(p => p.Images)
                 .WithOne(i => i.Product)
-                .HasForeignKey(i => i.ProductId);
+                .HasForeignKey(i => i.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Property(p => p.UserId)
                 .HasColumnName("UserId")
                 .IsRequired();

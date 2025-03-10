@@ -57,5 +57,34 @@ namespace YunShopBE.Controllers {
                 return BadRequest(ResponseFactory.WithError(e));
             }
         }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteAsync([FromBody] DeleteProductRequest deleteProductRequest)
+        {
+            try
+            {
+                await _productService.DeleteAsync(deleteProductRequest.ProductId, deleteProductRequest.UserId);
+                return Ok(ResponseFactory.WithSuccess("Product Deleted!"));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductRequest updateProductRequest)
+        {
+            try
+            {
+                await _productService.UpdateAsync(updateProductRequest.Id, updateProductRequest.Product.ToEntity());
+                return Ok(ResponseFactory.WithSuccess("Product Updated!"));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+        }
     }
 }

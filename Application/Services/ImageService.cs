@@ -17,24 +17,8 @@ namespace Application.Services {
         }
 
         public async Task AddAsync(Image entity) {
-            if (Uri.TryCreate(entity.Url, UriKind.Absolute, out Uri uriResult) &&
-                (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
-            {
-                if (allowedExtensions.Any(ext =>
-                        uriResult.AbsolutePath.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
-                {
-                    _imageRepository.Add(entity);
-                    await _imageRepository.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("Invalid image extension");
-                }
-            }
-            else
-            {
-                throw new Exception("Invalid image URL");
-            }
+            _imageRepository.Add(entity);
+            await _imageRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Image>> GetAllAsync() {
@@ -55,6 +39,38 @@ namespace Application.Services {
         public async Task<IEnumerable<Image>> GetImagesByProductId(int productId)
         {
             return await _imageRepository.GetImagesByProductId(productId);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var image = await _imageRepository.GetAsync(id);
+            if (image == null)
+            {
+                throw new Exception("Image not found");
+            }
+
+            _imageRepository.Delete(image);
+            await _imageRepository.SaveChangesAsync();
+        }
+
+        public void CheckImages(IEnumerable<Image> images)
+        {
+            foreach (var image in images)
+            {
+                if (Uri.TryCreate(image.Url, UriKind.Absolute, out Uri uriResult) &&
+                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                {
+                    if (!allowedExtensions.Any(ext =>
+                        uriResult.AbsolutePath.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        throw new Exception("Invalid image extension");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid image URL");
+                }
+            }
         }
     }
 }
