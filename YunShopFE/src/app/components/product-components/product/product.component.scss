@@ -61,6 +61,8 @@
     width: 100%;         /* Larghezza del 100% del contenitore */
     height: 250px;       /* Altezza fissa */
     object-fit: cover;   /* Ritaglia l'immagine per adattarla senza distorsioni */
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 /* Aggiungere overflow: hidden al contenitore dell'immagine per evitare che sfori */
