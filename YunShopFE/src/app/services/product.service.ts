@@ -1,47 +1,43 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { addProductRequest, Product } from '../models/product';
+import { addProductRequest, deleteProductRequest, Product } from '../models/product';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private GetProductsUrl = `${environment.baseURL}/Product/GetProducts`;
-  private GetProductByIdUrl = `${environment.baseURL}/Product/GetProductById`;
-  private AddProductUrl = `${environment.baseURL}/Product/AddProduct`;
-  private DeleteProductUrl = `${environment.baseURL}/Product/DeleteProduct`;
+  private GetProductsUrl = `${environment.baseURL}/Product/GetAll`;
+  private GetProductByIdUrl = `${environment.baseURL}/Product/GetById`;
+  private AddProductUrl = `${environment.baseURL}/Product/Add`;
+  private DeleteProductUrl = `${environment.baseURL}/Product/Delete`;
 
   constructor(private httpClient : HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.get<Product[]>(this.GetProductsUrl, { headers })
+    return this.httpClient.get<Product[]>(this.GetProductsUrl)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getProductById(id: number): Observable<Product> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.get<Product>(`${this.GetProductByIdUrl}/${id}`, { headers })
+    return this.httpClient.get<Product>(`${this.GetProductByIdUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   addProduct(addProductRequest: addProductRequest): Observable<Product> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.post<Product>(this.AddProductUrl, addProductRequest, { headers })
+    return this.httpClient.post<Product>(this.AddProductUrl, addProductRequest)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  deleteProduct(id: number): Observable<Product> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.delete<Product>(`${this.DeleteProductUrl}/${id}`, { headers })
+  deleteProduct(deleteProductRequest: deleteProductRequest): Observable<Product> {
+    return this.httpClient.delete<Product>(this.DeleteProductUrl, { body: deleteProductRequest })
       .pipe(
         catchError(this.handleError)
       );

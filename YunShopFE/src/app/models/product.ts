@@ -1,16 +1,35 @@
-//TODO sistemare il contenuto di questo file
 export interface Product {
   id: number;
   name: string;
-  description: string;
   price: number;
-  category: string;
-  imageUrl: string;
+  size: number;
+  description: string;
+  brand: string;
+  imageUrls: addProductRequest[];
+  createdAt: Date;
+  updatedAt: Date;
+  categoryId: number;
+  stock: number;
+  userId: number;
 }
 
 export interface addProductRequest {
   name: string;
-  description: string;
   price: number;
-  imageUrl: string;
+  size: number;
+  description: string;
+  brand: string;
+  images: addImageRequest[];
+  categoryId: number;
+  stock: number;
+  userId: number;
+  }
+
+export interface deleteProductRequest {
+  ProductId: number;
+  UserId: number;
+}
+
+export interface addImageRequest {
+  url: string;
 }

@@ -7,6 +7,8 @@
     border-radius: 5px;  /* Rettangolare */
     padding: 8px 20px;   /* Ridotto il padding per renderli più stretti */
     transition: all 0.3s ease;
+    width: 100%; /* Larghezza del 100% del contenitore */
+    margin-bottom: 10px; /* Aggiungi margine inferiore per distanziare verticalmente */
 }
 
 .btn-outline-primary:hover {
@@ -19,6 +21,29 @@
 .btn-outline-primary:focus {
     outline: none;
     box-shadow: 0 0 5px #8a4dff;
+}
+
+.btn-outline-danger {
+    border-color: #ff4d4d; /* Rosso */
+    color: #ff4d4d;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 5px;  /* Rettangolare */
+    padding: 8px 20px;   /* Ridotto il padding per renderli più stretti */
+    transition: all 0.3s ease;
+    width: 100%; /* Larghezza del 100% del contenitore */
+}
+
+.btn-outline-danger:hover {
+    background-color: #ff4d4d; /* Rosso di sfondo */
+    color: white;
+    border-color: #ff4d4d;
+    transform: translateY(-3px); /* Effetto di spostamento */
+}
+
+.btn-outline-danger:focus {
+    outline: none;
+    box-shadow: 0 0 5px #ff4d4d;
 }
 
 /* Avvicinare il bottone al testo */
