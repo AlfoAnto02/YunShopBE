@@ -1,0 +1,124 @@
+/* Overlay per il popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Sfondo semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Contenitore della finestra modale */
+  .modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  /* Pulsante per chiudere la finestra modale */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Titolo del form */
+  h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Stile per ogni gruppo di input */
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+  }
+  
+  .input-group input:focus {
+    border-color: #8a4dff; /* Colore viola al focus */
+  }
+  
+  /* Pulsante di submit */
+  .submit-btn {
+    background-color: #8a4dff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover sul pulsante */
+  .submit-btn:hover {
+    background-color: #00b8f4;
+  }
+  
+  .submit-btn:active {
+    background-color: #007bba;
+  }
+  
+  /* Frase "Already signed up? Let’s get you back in!" */
+  p {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333; /* Colore grigio scuro per il testo principale */
+    margin-top: 20px; /* Aggiungi spazio sopra */
+    margin-bottom: 10px; /* Aggiungi spazio sotto */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transizione morbida per il colore e la trasformazione */
+  }
+  
+  /* Stile del link SignIn */
+  p .sign-in-link a {
+    color: #8a4dff; /* Colore viola per il link */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease; /* Transizione morbida per il link */
+  }
+  
+  p .sign-in-link a:hover {
+    color: #00b8f4; /* Colore azzurro chiaro quando si passa sopra il link */
+    transform: translateX(5px); /* Effetto di spostamento a destra durante hover */
+    text-decoration: underline; /* Aggiungi l'underline al passaggio del mouse */
+  }
+  
+  a {
+    text-decoration: none; /* Rimuovi l'underline */
+    color: #8a4dff; /* Colore del link */
+    cursor: pointer; /* Mostra la manina quando il cursore è sopra il link */
+    transition: color 0.3s ease; /* Aggiungi un effetto di transizione per il colore */
+  }
+  
+  a:hover {
+    color: #00b8f4; /* Cambia colore quando l'utente passa sopra il link */
+  }
+  

@@ -1,0 +1,13 @@
+<section class="category-section">
+    <!-- Bottone per aggiungere una nuova categoria -->
+    <div class="add-category-container">
+        <button class="btn-add-category" routerLink="/New-Category">
+            + Add Category
+        </button>
+    </div>
+
+    <!-- Lista delle categorie -->
+    <div *ngFor="let category of categories">
+        <app-categories [category]="category"></app-categories>
+    </div>
+</section>

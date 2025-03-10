@@ -1,0 +1,15 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close-btn" (click)="close()">&times;</span>
+      <h2>Create New Category</h2>
+      <form id="newcategoryform" (ngSubmit)="onSubmit()">
+        <!-- Campo Email -->
+        <div class="input-group">
+          <label for="name">Name</label>
+          <input type="name" id="name" name="name" [(ngModel)]="name" required>
+        </div>
+        <button type="submit" class="submit-btn">Create Category</button>
+      </form>
+    </div>
+  </div>
+  
