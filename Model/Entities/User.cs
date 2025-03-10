@@ -20,5 +20,7 @@ namespace Model.Entities {
         public string Session_Id {get; set; }
         [JsonIgnore]
         public virtual ICollection<Category> CategoryCreated { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Product> ProductCreated { get; set; }
     }
 }
