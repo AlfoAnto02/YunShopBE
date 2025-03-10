@@ -26,7 +26,8 @@ export class CategoryComponent {
   }
 
   getAddedByUsername(): void {
-    this.userService.getUserById(this.category.addedById).subscribe({
+    console.log('category', this.category);
+    this.userService.getUserById(this.category.addedBy).subscribe({
       next: (response: any) => {
         console.log('response:', response);
         this.addedByUsername = response.result.user.userName;

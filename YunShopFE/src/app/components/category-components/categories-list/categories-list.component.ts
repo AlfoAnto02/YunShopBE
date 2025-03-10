@@ -24,11 +24,12 @@ export class CategoriesListComponent {
     this.CategoriesService.getCategories().subscribe({
       next: (response: any) => {
         if (response && Array.isArray(response.result)) {
+          console.log('response:', response.result);
           this.categories = response.result;
           console.log('Categories loaded:', this.categories);
         } else {
           console.error('Expected an array of categories, but got:', response);
-          this.categories = []; // Ensure categories is always an array
+          this.categories = [];
         }
       },
       error: (error: any) => {
