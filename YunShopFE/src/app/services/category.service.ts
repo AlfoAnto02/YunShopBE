@@ -9,13 +9,13 @@ import { addCategoryRequest } from '../models/category';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService {
+export class CategoryService {
   GetCategoriesUrl = `${environment.baseURL}/Category/getAll`;
   GetCategoryByIdUrl = `${environment.baseURL}/Category/getById`;
   AddCategoryUrl = `${environment.baseURL}/Category/add`;
   DeleteCategoryByNameUrl = `${environment.baseURL}/Category/delete`;
 
-  constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
+  constructor(private httpClient: HttpClient, private tokenService: TokenService) { }
 
   getCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.GetCategoriesUrl)
@@ -31,15 +31,15 @@ export class CategoriesService {
       );
   }
 
-  addCategory(addCategoryRequest : addCategoryRequest): Observable<Category> {
+  addCategory(addCategoryRequest: addCategoryRequest): Observable<Category> {
 
-    return this.httpClient.post<Category>(this.AddCategoryUrl, addCategoryRequest )
+    return this.httpClient.post<Category>(this.AddCategoryUrl, addCategoryRequest)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  deleteCategory(deleteCategoryRequest : deleteCategoryRequest): Observable<Category> {
+  deleteCategory(deleteCategoryRequest: deleteCategoryRequest): Observable<Category> {
 
     return this.httpClient.delete<Category>(this.DeleteCategoryByNameUrl, { body: deleteCategoryRequest })
       .pipe(
@@ -47,7 +47,7 @@ export class CategoriesService {
       );
   }
 
-private handleError(error: any): Observable<never> {
+  private handleError(error: any): Observable<never> {
     console.error('An error occurred', error);
     return throwError(error);
   }

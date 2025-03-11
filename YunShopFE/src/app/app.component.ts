@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { CategoriesService } from './services/category.service';
+import { CategoryService } from './services/category.service';
 import { UserService } from './services/user.service';
 import { TokenService } from './services/token.service';
 
@@ -15,21 +15,21 @@ import { TokenService } from './services/token.service';
 export class AppComponent implements AfterViewInit {
   title = 'Catalog';
   isPopupVisible = false;
-  user : any = null;
+  user: any = null;
   isAuthenticated = false;
 
-  constructor(private CategoriesService: CategoriesService, private router: Router, private usersService : UserService, private tokenService: TokenService) {}
+  constructor(private CategoriesService: CategoryService, private router: Router, private usersService: UserService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-      this.checkAuthentication();
-    }
+    this.checkAuthentication();
+  }
 
   ngAfterViewInit(): void {
     const bar = Array.from(document.querySelectorAll("li"));
 
-    bar.forEach(function(it) {
-      it.onclick = function() {
-        bar.forEach(function(el) {
+    bar.forEach(function (it) {
+      it.onclick = function () {
+        bar.forEach(function (el) {
           el.classList.remove("active");
         });
         (this as HTMLElement).classList.toggle("active");

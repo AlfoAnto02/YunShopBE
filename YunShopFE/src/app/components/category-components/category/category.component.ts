@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Category, deleteCategoryRequest } from '../../../models/category';
 import { UserService } from '../../../services/user.service';
 import { TokenService } from '../../../services/token.service';
-import { CategoriesService } from '../../../services/category.service';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,11 +15,11 @@ export class CategoryComponent {
   @Input() category!: Category;
   addedByUsername: string = '';
   deleteCategoryRequest: deleteCategoryRequest = {
-      name: '',
-      userId: 0
-    };
+    name: '',
+    userId: 0
+  };
 
-  constructor(private userService: UserService, private tokenService:TokenService, private categoryService: CategoriesService) {}
+  constructor(private userService: UserService, private tokenService: TokenService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getAddedByUsername();

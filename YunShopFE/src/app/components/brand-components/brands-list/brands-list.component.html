@@ -1,0 +1,13 @@
+<section class="brand-section">
+    <!-- Bottone per aggiungere un nuova brand -->
+    <div class="add-brand-container">
+        <button class="btn-add-brand" routerLink="/New-Brand">
+            + Add Brand
+        </button>
+    </div>
+
+    <!-- Lista dei brands -->
+    <div *ngFor="let brand of brands">
+        <app-brand [brand]="brand"></app-brand>
+    </div>
+</section>

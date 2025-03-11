@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { CategoriesService } from '../../../services/category.service';
+import { CategoryService } from '../../../services/category.service';
 import { addCategoryRequest } from '../../../models/category';
 import { TokenService } from '../../../services/token.service';
 import { CommonModule } from '@angular/common';
@@ -20,9 +20,9 @@ export class NewCategoryComponent {
     AddedBy: 0
   };
 
-  
-  constructor(private router:Router, private CategoriesService: CategoriesService, private TokenService: TokenService) {}
-  
+
+  constructor(private router: Router, private CategoriesService: CategoryService, private TokenService: TokenService) { }
+
   ngOnInit(): void {
     this.getCurrentUserId();
   }
@@ -42,23 +42,30 @@ export class NewCategoryComponent {
       AddedBy: this.currentUserId
     };
   }
-  
+
   onSubmit() {
     this.createAddCategoryRequest()
     this.CategoriesService.addCategory(this.addCategoryRequest)
-    .subscribe({
-      next: response => {
-        console.log('Category created successfully:', response);
-        this.router.navigate(['/Categories']);
-        this.close()
-      },
-      error: error => {
-        console.error('Error creating category:', error);
-        alert('Error creating category: ' + (error.error?.message || 'Unknown error'));
-      }
-    });
+      .subscribe({
+        next: response => {
+          console.log('Category created successfully:', response);
+          alert('Category created successfully');
+          this.name = '';
+          this.router.navigate(['/New-Category']);
+        },
+        error: error => {
+          console.error('Error creating category:', error);
+          alert('Error creating category: ' + (error.error?.message || 'Unknown error'));
+          this.name = '';
+        }
+      });
   }
-  
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEscape(event: KeyboardEvent) {
+    this.close();
+  }
+
   close() {
     this.router.navigate(['/Categories']);
   }

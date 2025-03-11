@@ -1,0 +1,13 @@
+<section class="size-section">
+    <!-- Bottone per aggiungere una nuova size -->
+    <div class="add-size-container">
+        <button class="btn-add-size" routerLink="/New-Size">
+            + Add Size
+        </button>
+    </div>
+
+    <!-- Lista dei sizes -->
+    <div *ngFor="let size of sizes">
+        <app-size [size]="size"></app-size>
+    </div>
+</section>

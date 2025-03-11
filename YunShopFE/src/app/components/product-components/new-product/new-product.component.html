@@ -16,10 +16,12 @@
                     <input type="text" id="description" name="description" [(ngModel)]="description" required>
                 </div>
 
-                <!-- Product Brand-->
+                <!-- Product Brand -->
                 <div class="input-group">
                     <label for="brand">Brand</label>
-                    <input type="text" id="brand" name="brand" [(ngModel)]="brand" required>
+                    <select id="brand" name="brand" [(ngModel)]="brand" required>
+                        <option *ngFor="let brand of brands" [value]="brand.name">{{ brand.name }}</option>
+                    </select>
                 </div>
 
                 <!-- Product Category -->
@@ -39,9 +41,11 @@
 
                 <!-- Product Size, Price, and Stock -->
                 <div class="input-group three-columns">
-                    <div>
+                    <div class="input-group">
                         <label for="size">Size</label>
-                        <input type="number" id="size" name="size" [(ngModel)]="size" required>
+                        <select id="size" name="size" [(ngModel)]="size" required>
+                            <option *ngFor="let size of sizes" [value]="size.size">{{ size.size }}</option>
+                        </select>
                     </div>
                     <div>
                         <label for="price">Price</label>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Category } from '../../../models/category';
-import { CategoriesService } from '../../../services/category.service';
+import { CategoryService } from '../../../services/category.service';
 import { CategoryComponent } from '../category/category.component';
 import { RouterLink } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 export class CategoriesListComponent {
   categories: Category[] = [];
 
-  constructor(private CategoriesService: CategoriesService) {}
+  constructor(private CategoriesService: CategoryService) { }
 
   ngOnInit(): void {
     this.loadCategories();

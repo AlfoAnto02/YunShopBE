@@ -1,0 +1,11 @@
+<!-- Horizontal Brand Component -->
+<div class="d-flex align-items-center border rounded shadow-sm p-3 mb-3">
+    <!-- brand name -->
+    <h5 class="fw-bolder text-dark me-3 mb-0">{{ brand.name }}</h5>
+
+    <!-- Added by -->
+    <span class="text-muted me-auto">Added by: {{ addedByUsername }}</span>
+
+    <!-- Delete button -->
+    <button class="btn btn-danger" (click)="deleteBrand()">Delete</button>
+</div>

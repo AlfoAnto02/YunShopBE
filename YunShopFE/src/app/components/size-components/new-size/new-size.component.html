@@ -1,0 +1,14 @@
+<div class="modal-overlay" (click)="close()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <span class="close-btn" (click)="close()">&times;</span>
+        <h2>Create New Size</h2>
+        <form id="newbrandform" (ngSubmit)="onSubmit()">
+            <!-- Campo Email -->
+            <div class="input-group">
+                <label for="size">Name</label>
+                <input type="size" id="size" name="size" [(ngModel)]="size" required>
+            </div>
+            <button type="submit" class="submit-btn">Create Size</button>
+        </form>
+    </div>
+</div>
