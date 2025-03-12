@@ -24,16 +24,6 @@ namespace Model.Configurations {
                 .HasColumnName("Description")
                 .HasMaxLength(255)
                 .IsRequired();
-            builder.Property(p => p.Price)
-                .HasColumnName("Price")
-                .IsRequired();
-            builder.Property(p => p.Size)
-                .HasColumnName("Size")
-                .IsRequired();
-            builder.Property(p => p.Brand)
-                .HasColumnName("Brand")
-                .HasMaxLength(50)
-                .IsRequired();
             builder.Property(p => p.CreatedAt)
                 .HasColumnName("Created_at")
                 .HasColumnType("date");
@@ -42,9 +32,6 @@ namespace Model.Configurations {
                 .HasColumnType("date");
             builder.Property(p => p.CategoryId)
                 .HasColumnName("Category_Id")
-                .IsRequired();
-            builder.Property(p => p.Stock)
-                .HasColumnName("Stock")
                 .IsRequired();
             builder.HasOne(p => p.Category)
                 .WithMany(c => c.Products)
@@ -59,6 +46,9 @@ namespace Model.Configurations {
             builder.HasOne(p => p.User)
                 .WithMany(u => u.ProductCreated)
                 .HasForeignKey(p => p.UserId);
+            builder.HasOne(p => p.Brand)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.BrandId);
         }
 
     }
