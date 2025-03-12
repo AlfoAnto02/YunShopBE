@@ -19,6 +19,9 @@ namespace Application.Extensions {
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<ISizeService, SizeService>();
+            services.AddScoped<IProductSizeService, ProductSizeService>();
             return services;
         }
     }

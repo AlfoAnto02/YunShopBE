@@ -15,12 +15,15 @@ namespace Application.Services {
         private readonly IUserService _userService;
         private readonly IImageService _imageService;
         private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
+        private readonly IProductSizeService _productSizeService;
         public ProductService(ProductRepository productRepository,IImageService imageService, IUserService userService, 
-            ICategoryService categoryService) {
+            ICategoryService categoryService, IBrandService brandService, IProductSizeService productSizeService) {
             _productRepository = productRepository;
             _userService = userService;
             _imageService = imageService;
             _categoryService = categoryService;
+            _brandService = brandService;
         }
         public async Task AddAsync(Product entity)
         {
@@ -88,10 +91,7 @@ namespace Application.Services {
                 productToUpdate.CategoryId = product.CategoryId;
             }
             productToUpdate.Name = product.Name;
-            productToUpdate.Brand = product.Brand;
-            productToUpdate.Price = product.Price;
-            productToUpdate.Stock = product.Stock;
-            productToUpdate.Size = product.Size;
+            productToUpdate.BrandId = product.BrandId;
             productToUpdate.Description = product.Description;
             productToUpdate.UpdatedAt = DateTime.Now;
             foreach (var image in product.Images)
@@ -109,10 +109,6 @@ namespace Application.Services {
 
         private void CheckEntity(Product entity) {
             switch (entity) {
-                case { Stock: <= 0 }:
-                    throw new Exception("Stock must be greater than 0");
-                case { Price: <= 0 }:
-                    throw new Exception("Price must be greater than 0");
                 case { UserId: 0 }:
                     throw new Exception("User Id must be greater than 0");
             }

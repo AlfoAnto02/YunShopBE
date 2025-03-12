@@ -19,7 +19,6 @@ namespace Application.Models.DTOs {
             Id = product.Id;
             Name = product.Name;
             Description = product.Description;
-            Price = product.Price;
             CategoryId = product.CategoryId;
             CategoryName = product.Category.Name;
             ImageUrls = new List<string>();
