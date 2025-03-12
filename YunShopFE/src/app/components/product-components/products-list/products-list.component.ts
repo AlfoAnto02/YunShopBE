@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { ProductComponent } from '../product/product.component';
 import { Product } from '../../../models/product';
 import { ProductService } from '../../../services/product.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
-  imports: [CommonModule, ProductComponent],
+  imports: [CommonModule, ProductComponent, RouterLink],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
@@ -20,11 +21,19 @@ export class ProductsListComponent {
   }
 
   loadProducts(): void {
-    this.ProductService.getProducts().subscribe(
-      (data: Product[]) => {
-        this.products = data;
+    this.ProductService.getProducts().subscribe({
+      next: (response: any) => {
+        if (response && Array.isArray(response.result)) {
+          this.products = response.result;
+          console.log('Products loaded:', this.products);
+        } else {
+          console.error('Expected an array of produts, but got:', response);
+          this.products = [];
+        }
       },
-      error => console.error('There was an error!', error)
-    );
+      error: (error: any) => {
+        console.error('Error loading products:', error);
+      }
+    });
   }
 }

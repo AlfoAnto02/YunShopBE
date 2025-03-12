@@ -1,8 +1,10 @@
 <!-- Product Component -->
 <div class="col mb-5">
     <div class="card h-100 border-0 shadow-sm">
-        <!-- Product image -->
-        <img class="card-img-top" [src]="product.imageUrl" alt="{{product.name}}" />
+        <!-- Product image carousel -->
+        <div class="image">
+            <img [src]="product.imageUrls[0]" class="card-img-top carousel-image"/>
+        </div>
         
         <!-- Product details -->
         <div class="card-body p-4">
@@ -18,7 +20,9 @@
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
                 <!-- View Details button -->
-                <a [routerLink]="['/Products/Product', product.id]" class="btn btn-outline-primary mt-auto">View Details</a>
+                <a class="btn btn-outline-primary mt-auto action-button">View Details</a>
+                <!-- Delete button -->
+                <button class="btn btn-outline-danger mt-auto action-button" (click)="deleteProduct()">Delete</button>
             </div>
         </div>
     </div>

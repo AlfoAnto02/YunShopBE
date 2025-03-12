@@ -44,4 +44,13 @@ export class TokenService {
     }
     return decodedPayload.user_id;
   }
+
+  isUserAdmin(): boolean {
+    const decodedPayload = this.getDecodedToken();
+    if (!decodedPayload) {
+      console.error('Invalid token');
+      return false;
+    }
+    return decodedPayload.role === 'admin' || decodedPayload.role === 'Admin';
+  }
 }

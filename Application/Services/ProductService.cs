@@ -29,7 +29,7 @@ namespace Application.Services {
             CheckUser(user);
             var category = await _categoryService.GetAsync(entity.CategoryId);
             CheckCategory(category);
-            _imageService.CheckImages(entity.Images);
+            //_imageService.CheckImages(entity.Images);
             _productRepository.Add(entity);
             foreach (var image in entity.Images)
             {

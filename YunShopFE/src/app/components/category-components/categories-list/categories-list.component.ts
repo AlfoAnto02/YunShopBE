@@ -28,7 +28,7 @@ export class CategoriesListComponent {
           console.log('Categories loaded:', this.categories);
         } else {
           console.error('Expected an array of categories, but got:', response);
-          this.categories = []; // Ensure categories is always an array
+          this.categories = [];
         }
       },
       error: (error: any) => {
