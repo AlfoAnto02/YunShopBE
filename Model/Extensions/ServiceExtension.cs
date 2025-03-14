@@ -18,6 +18,9 @@ namespace Model.Extensions {
             services.AddScoped<CategoryRepository>();
             services.AddScoped<ImageRepository>();
             services.AddScoped<ProductRepository>();
+            services.AddScoped<SizeRepository>();
+            services.AddScoped<BrandRepository>();
+            services.AddScoped<ProductSizeRepository>();
             return services;
         }
     }
