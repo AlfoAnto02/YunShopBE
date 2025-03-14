@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Application.Abstractions;
 using Application.Options;
 using Application.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,12 @@ namespace Application.Extensions {
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<ISizeService, SizeService>();
             services.AddScoped<IProductSizeService, ProductSizeService>();
+
+            services.AddValidatorsFromAssembly(AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SingleOrDefault(assembly => assembly.GetName().Name == "Application"));
+            services.AddFluentValidationAutoValidation();
+
             return services;
         }
     }

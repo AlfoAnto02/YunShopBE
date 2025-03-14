@@ -16,9 +16,8 @@ namespace Application.Services {
         private readonly IImageService _imageService;
         private readonly ICategoryService _categoryService;
         private readonly IBrandService _brandService;
-        private readonly IProductSizeService _productSizeService;
         public ProductService(ProductRepository productRepository,IImageService imageService, IUserService userService, 
-            ICategoryService categoryService, IBrandService brandService, IProductSizeService productSizeService) {
+            ICategoryService categoryService, IBrandService brandService) {
             _productRepository = productRepository;
             _userService = userService;
             _imageService = imageService;
