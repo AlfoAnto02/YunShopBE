@@ -16,15 +16,6 @@ namespace Application.Services {
             _userRepository = userRepository;
         }
         public async Task AddAsync(Brand entity) {
-            var brand = await _brandRepository.GetByName(entity.Name);
-            if (brand != null) {
-                throw new Exception("Brand already exists");
-            }
-            var user = await _userRepository.GetAsync(entity.AddedBy);
-            if (user.Role != "Admin")
-            {
-                throw new Exception("Only Admin can add a brand");
-            }
             _brandRepository.Add(entity);
             await _brandRepository.SaveChangesAsync();
         }

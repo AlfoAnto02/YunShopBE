@@ -30,7 +30,8 @@ namespace Application.Validators {
                 });
             RuleFor(x => x.AddedBy)
                 .NotEmpty()
-                .WithMessage("AddedBy is required");
+                .WithMessage("AddedBy is required")
+                .MustBeAdmin(_userRepository);
         }
     }
 }

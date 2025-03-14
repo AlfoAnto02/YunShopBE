@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Repositories;
 
 namespace Application.Extensions {
     public static class ValidationExtensions
@@ -26,6 +27,17 @@ namespace Application.Extensions {
             Func<string, Task<bool>> isUniqueFunc) {
             return ruleBuilder.MustAsync(async (name, cancellation) => await isUniqueFunc(name))
                 .WithMessage("Name already exists");
+        }
+
+        public static IRuleBuilderOptions<T, int> MustBeAdmin<T>(
+            this IRuleBuilder<T, int> ruleBuilder,
+            UserRepository userRepository) {
+            return (IRuleBuilderOptions<T, int>)ruleBuilder.Custom((userId, context) => {
+                var user = userRepository.GetAsync(userId).Result;
+                if (user.Role != "Admin") {
+                    context.AddFailure("UnAuthorized");
+                }
+            });
         }
     }
 }

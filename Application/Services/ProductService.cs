@@ -62,14 +62,7 @@ namespace Application.Services {
 
         public async Task DeleteAsync(int productId, int userId)
         {
-            var product = await _productRepository.GetAsync(productId);
-            if (product == null)
-            {
-                throw new Exception("Product not found");
-            }
-
-            CheckUser(await _userService.GetAsync(userId));
-            _productRepository.Delete(product);
+            _productRepository.Delete(await _productRepository.GetAsync(productId));
             await _productRepository.SaveChangesAsync();
         }
 
