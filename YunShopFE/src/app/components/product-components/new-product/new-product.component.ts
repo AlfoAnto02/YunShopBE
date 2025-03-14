@@ -28,6 +28,10 @@ export class NewProductComponent {
   stock: number = 0;
   userId: number = 0;
 
+  express: boolean = false;
+  hide: boolean = false;
+  oos: boolean = false;
+
   imageUrl: string = '';
   images: addImageRequest[] = [];
 
@@ -51,12 +55,23 @@ export class NewProductComponent {
     url: ''
   };
 
+  boxes: any[] = [
+    {
+      size: 0,
+      price: 0,
+      stock: 0,
+      express: false,
+      hide: false,
+      oos: false
+    }
+  ];
+
   constructor(private router: Router, private ProductService: ProductService,
     private TokenService: TokenService, private CategoryService: CategoryService,
     private BrandService: BrandService, private SizeService: SizeService) { }
 
   ngOnInit(): void {
-    this.loadCategories();
+    this.loadFields();
   }
 
   loadFields(): void {
@@ -147,9 +162,10 @@ export class NewProductComponent {
       images: this.images,
       categoryId: this.getCategoryIdByName(this.category),
       stock: this.stock,
-      userId: this.TokenService.getUserIdByToken()
+      userId: this.TokenService.getUserIdByToken(),
     };
   }
+
 
   onSubmit() {
     this.addProductRequest = this.createAddProductRequest();
@@ -181,6 +197,17 @@ export class NewProductComponent {
     this.stock = 0;
     this.imageUrl = '';
     this.images = [];
+  }
+
+  addNewItem(): void {
+    this.boxes.push({
+      size: 0,
+      price: 0,
+      stock: 0,
+      express: false,
+      hide: false,
+      oos: false
+    });
   }
 
   @HostListener('document:keydown.escape', ['$event'])

@@ -39,31 +39,56 @@
                     <button type="button" class="add-url-btn" (click)="addImageUrl()">Add Image URL</button>
                 </div>
 
-                <!-- Product Size, Price, and Stock -->
-                <div class="input-group three-columns">
-                    <div class="input-group">
-                        <label for="size">Size</label>
-                        <select id="size" name="size" [(ngModel)]="size" required>
-                            <option *ngFor="let size of sizes" [value]="size.size">{{ size.size }}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="price">Price</label>
-                        <input type="number" id="price" name="price" [(ngModel)]="price" required>
-                    </div>
-                    <div>
-                        <label for="stock">Stock</label>
-                        <input type="number" id="stock" name="stock" [(ngModel)]="stock" required>
+                <!-- Image Preview -->
+                <div class="input-group full-width">
+                    <label>Image Preview</label>
+                    <div class="image-preview">
+                        <img *ngFor="let image of images" [src]="image.url" alt="Image preview">
                     </div>
                 </div>
-            </div>
 
-            <!-- Image Preview -->
-            <div class="input-group full-width">
-                <label>Image Preview</label>
-                <div class="image-preview">
-                    <img *ngFor="let image of images" [src]="image.url" alt="Image preview">
+                <!-- Contorno per Size, Price, Stock e Checkbox -->
+                <div *ngFor="let box of boxes; let i = index" class="input-group bordered-box">
+                    <div class="input-group three-columns">
+                        <div class="input-group">
+                            <label for="size-{{i}}">Size</label>
+                            <select id="size-{{i}}" name="size-{{i}}" [(ngModel)]="box.size" required>
+                                <option *ngFor="let size of sizes" [value]="size.size">{{ size.size }}</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="price-{{i}}">Price</label>
+                            <input type="number" id="price-{{i}}" name="price-{{i}}" [(ngModel)]="box.price" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="stock-{{i}}">Stock</label>
+                            <input type="number" id="stock-{{i}}" name="stock-{{i}}" [(ngModel)]="box.stock" required>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox for express, hide, and OoS -->
+                    <div class="input-group three-columns">
+                        <div class="input-group checkbox-group">
+                            <label for="express-{{i}}">Express</label>
+                            <input type="checkbox" id="express-{{i}}" name="express-{{i}}" [(ngModel)]="box.express">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="hide-{{i}}">Hide</label>
+                            <input type="checkbox" id="hide-{{i}}" name="hide-{{i}}" [(ngModel)]="box.hide">
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label for="oos-{{i}}">OoS</label>
+                            <input type="checkbox" id="oos-{{i}}" name="oos-{{i}}" [(ngModel)]="box.oos">
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Simbolo + premibile -->
+                <div class="input-group plus-button-container">
+                    <button type="button" class="plus-button" (click)="addNewItem()">+</button>
+                </div>
+
+
             </div>
 
             <!-- Submit Button -->
