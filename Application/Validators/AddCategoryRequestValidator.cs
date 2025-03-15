@@ -23,9 +23,9 @@ namespace Application.Validators {
             RuleFor(x => x.Name)
                 .MaximumLength(50)
                 .WithMessage("Name must not exceed 50 characters")
-                .MustBeUniqueName(async name =>
+                .MustBeUniqueName(name =>
                 {
-                    var brand = await _categoryRepository.GetByName(name);
+                    var brand = _categoryRepository.GetByName(name).Result;
                     return brand.Name != name;
                 });
             RuleFor(x => x.AddedBy)

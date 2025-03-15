@@ -13,10 +13,12 @@ namespace Model.Configurations {
             builder.HasKey(ps => ps.Id);
             builder.HasOne(ps => ps.Product)
                 .WithMany(p => p.ProductSizes)
-                .HasForeignKey(ps => ps.ProductId);
+                .HasForeignKey(ps => ps.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(ps => ps.Size)
                 .WithMany(s => s.ProductSizes)
-                .HasForeignKey(ps => ps.SizeId);
+                .HasForeignKey(ps => ps.SizeId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Property(ps => ps.Stock)
                 .HasColumnName("Stock")
                 .IsRequired();

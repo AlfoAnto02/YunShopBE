@@ -24,6 +24,6 @@ namespace Model.Entities {
         [JsonIgnore]
         public virtual Brand Brand { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ProductSize> ProductSizes { get; set; }
+        public virtual ICollection<ProductSize> ProductSizes { get; set; } = new List<ProductSize>();
     }
 }

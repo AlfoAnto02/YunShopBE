@@ -34,7 +34,7 @@ namespace Application.Validators {
 
         private void AlreadyRegisteredRule(string value, ValidationContext<AddUserRequest> context) {
             var user = _userRepository.GetByEmail(value).Result;
-            if (user.Email==value) {
+            if (user!=null) {
                 context.AddFailure("Email already registered");
             }
         }

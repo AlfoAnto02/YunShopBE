@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 namespace Application.Models.Request {
     public class AddSizeRequest {
         public string SizeValue { get; set; }
+        public int UserId { get; set; }
 
         public Size ToEntity() {
             return new Size {
                 SizeValue = this.SizeValue,
+                UserId = this.UserId
             };
         }
     }

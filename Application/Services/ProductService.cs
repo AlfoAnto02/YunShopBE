@@ -12,26 +12,26 @@ using Model.Repositories;
 namespace Application.Services {
     public class ProductService : IProductService {
         private readonly ProductRepository _productRepository;
-        private readonly IUserService _userService;
         private readonly IImageService _imageService;
-        private readonly ICategoryService _categoryService;
-        private readonly IBrandService _brandService;
-        public ProductService(ProductRepository productRepository,IImageService imageService, IUserService userService, 
-            ICategoryService categoryService, IBrandService brandService) {
+        private readonly ISizeService _sizeService;
+        public ProductService(ProductRepository productRepository,IImageService imageService, ISizeService _service) {
             _productRepository = productRepository;
-            _userService = userService;
             _imageService = imageService;
-            _categoryService = categoryService;
-            _brandService = brandService;
+            _sizeService = _service;
         }
-        public async Task AddAsync(Product entity)
+
+        public async Task AddAsync(Product entity, List<AddProductSizeRequest> sizes)
         {
-            CheckEntity(entity);
-            var user = await _userService.GetAsync(entity.UserId);
-            CheckUser(user);
-            var category = await _categoryService.GetAsync(entity.CategoryId);
-            CheckCategory(category);
             //_imageService.CheckImages(entity.Images);
+            foreach (var ids in sizes) {
+                var size = await _sizeService.GetAsync(ids.SizeId);
+                entity.ProductSizes.Add(new ProductSize {
+                    ProductId = entity.Id,
+                    SizeId = size.Id,
+                    Stock = ids.Stock,
+                    Price = ids.Price
+                });
+            }
             _productRepository.Add(entity);
             foreach (var image in entity.Images)
             {
@@ -49,7 +49,27 @@ namespace Application.Services {
             }
             return products;
         }
-
+        /*
+         *            {
+               "name": "Prova Prodotto",
+               "description": "Aggiunta prova prodotto",
+               "images": [
+               {
+                   "url": "https://ensdrongo/ciao.jpeg"
+               }
+               ],
+               "categoryId": 1,
+               "userId": 1,
+               "brandId": 1,
+               "sizes": [
+               {
+                   "sizeId": 1,
+                   "stock": 10,
+                   "price": 10
+               }
+               ]
+           }
+         */
         public async Task<Product> GetAsync(int id) {
             var product = await _productRepository.GetAsync(id);
             if (product == null)
@@ -67,10 +87,6 @@ namespace Application.Services {
 
         public async Task UpdateAsync(int productId, Product product)
         {
-            CheckEntity(product);
-            CheckUser(await _userService.GetAsync(product.UserId));
-            var category = await _categoryService.GetAsync(product.CategoryId);
-            CheckCategory(category);
             var productToUpdate = await _productRepository.GetAsync(productId);
             var imagesToRemove = productToUpdate.Images.Where(x => !product.Images.Select(y => y.Id).Contains(x.Id)).ToList();
             foreach (var image in imagesToRemove)
@@ -99,26 +115,8 @@ namespace Application.Services {
 
         }
 
-        private void CheckEntity(Product entity) {
-            switch (entity) {
-                case { UserId: 0 }:
-                    throw new Exception("User Id must be greater than 0");
-            }
-        }
-
-        private void CheckUser(User user) {
-            if (user == null) {
-                throw new Exception("User not found");
-            }
-            if (user.Role != "Admin") {
-                throw new Exception("User must be an admin");
-            }
-        }
-
-        private void CheckCategory(Category category) {
-            if (category == null) {
-                throw new Exception("Category not found");
-            }
+        public Task AddAsync(Product entity) {
+            throw new NotImplementedException();
         }
     }
 }

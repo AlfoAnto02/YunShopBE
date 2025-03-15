@@ -49,6 +49,10 @@ namespace Model.Configurations {
             builder.HasOne(p => p.Brand)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.BrandId);
+            builder.HasMany(p => p.ProductSizes)
+                .WithOne(ps => ps.Product)
+                .HasForeignKey(ps => ps.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

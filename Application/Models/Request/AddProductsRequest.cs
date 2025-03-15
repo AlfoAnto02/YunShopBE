@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 using Model.Entities;
 
 namespace Application.Models.Request {
-    public class AddProductRequest {
+    public class AddProductsRequest {
         public string Name { get; set; }
-        public decimal Price { get; set; }
         public string Description { get; set; }
         public List<AddImageRequest> Images { get; set; } = new List<AddImageRequest>();
         public int CategoryId { get; set; }
-        public int Stock { get; set; }
         public int UserId { get; set; }
         public int BrandId { get; set; }
-        public int SizeId { get; set; }
+        public List<AddProductSizeRequest> Sizes { get; set; } = new List<AddProductSizeRequest>();
 
         public Product ToEntity()
         {

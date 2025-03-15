@@ -24,8 +24,9 @@ namespace Application.Extensions {
 
         public static IRuleBuilderOptions<T, string> MustBeUniqueName<T>(
             this IRuleBuilder<T, string> ruleBuilder,
-            Func<string, Task<bool>> isUniqueFunc) {
-            return ruleBuilder.MustAsync(async (name, cancellation) => await isUniqueFunc(name))
+            Func<string, bool> isUniqueFunc) {
+            return ruleBuilder
+                .Must(name => isUniqueFunc(name))
                 .WithMessage("Name already exists");
         }
 

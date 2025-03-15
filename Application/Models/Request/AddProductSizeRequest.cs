@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Models.Request {
-    public class UpdateProductRequest {
-        public int Id { get; set; }
-        public AddProductsRequest Product { get; set; }
+    public class AddProductSizeRequest
+    {
+        public int SizeId { get; set; }
+        public int Stock { get; set; }
+        public decimal Price { get; set; }
     }
 }

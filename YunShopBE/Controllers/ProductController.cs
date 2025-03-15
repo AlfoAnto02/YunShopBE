@@ -45,11 +45,11 @@ namespace YunShopBE.Controllers {
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync([FromBody] AddProductRequest addProductRequest) {
+        public async Task<IActionResult> AddProductsAsync([FromBody] AddProductsRequest addProductRequest) {
             try
             {
                 var product = addProductRequest.ToEntity();
-                await _productService.AddAsync(product);
+                await _productService.AddAsync(product, addProductRequest.Sizes);
                 return Ok(ResponseFactory.WithSuccess("Product Added!"));
             }
             catch (Exception e)

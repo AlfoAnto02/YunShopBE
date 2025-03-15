@@ -14,10 +14,6 @@ namespace Application.Services {
             _sizeRepository = sizeRepository;
         }
         public async Task AddAsync(Size entity) {
-            var size = await _sizeRepository.GetByName(entity.SizeValue);
-            if (size != null) {
-                throw new Exception("Size already exists");
-            }
             _sizeRepository.Add(entity);
             await _sizeRepository.SaveChangesAsync();
         }
