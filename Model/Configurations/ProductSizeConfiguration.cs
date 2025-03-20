@@ -10,6 +10,7 @@ using Model.Entities;
 namespace Model.Configurations {
     public class ProductSizeConfiguration : IEntityTypeConfiguration<ProductSize> {
         public void Configure(EntityTypeBuilder<ProductSize> builder) {
+            builder.ToTable("ProductSize");
             builder.HasKey(ps => ps.Id);
             builder.HasOne(ps => ps.Product)
                 .WithMany(p => p.ProductSizes)

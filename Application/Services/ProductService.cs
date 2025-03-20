@@ -14,32 +14,36 @@ namespace Application.Services {
         private readonly ProductRepository _productRepository;
         private readonly IImageService _imageService;
         private readonly ISizeService _sizeService;
-        public ProductService(ProductRepository productRepository,IImageService imageService, ISizeService _service) {
+        private readonly IProductSizeService productSizeService;
+        public ProductService(ProductRepository productRepository,IImageService imageService, ISizeService _service, IProductSizeService productSizeService) {
             _productRepository = productRepository;
             _imageService = imageService;
             _sizeService = _service;
+            this.productSizeService = productSizeService;
         }
 
         public async Task AddAsync(Product entity, List<AddProductSizeRequest> sizes)
         {
-            //_imageService.CheckImages(entity.Images);
+            _productRepository.Add(entity);
+            await _productRepository.SaveChangesAsync();
+            var productSizes = new List<ProductSize>();
             foreach (var ids in sizes) {
                 var size = await _sizeService.GetAsync(ids.SizeId);
-                entity.ProductSizes.Add(new ProductSize {
+                productSizes.Add(new ProductSize {
                     ProductId = entity.Id,
                     SizeId = size.Id,
                     Stock = ids.Stock,
                     Price = ids.Price
                 });
             }
-            _productRepository.Add(entity);
             foreach (var image in entity.Images)
             {
                 image.ProductId = entity.Id;
                 await _imageService.AddAsync(image);
             }
-            await _productRepository.SaveChangesAsync();
+            await productSizeService.AddRelationsAsync(productSizes);
         }
+
 
         public async Task<IEnumerable<Product>> GetAllAsync() {
             var products = await _productRepository.GetProductsWithImages();
@@ -49,27 +53,7 @@ namespace Application.Services {
             }
             return products;
         }
-        /*
-         *            {
-               "name": "Prova Prodotto",
-               "description": "Aggiunta prova prodotto",
-               "images": [
-               {
-                   "url": "https://ensdrongo/ciao.jpeg"
-               }
-               ],
-               "categoryId": 1,
-               "userId": 1,
-               "brandId": 1,
-               "sizes": [
-               {
-                   "sizeId": 1,
-                   "stock": 10,
-                   "price": 10
-               }
-               ]
-           }
-         */
+    
         public async Task<Product> GetAsync(int id) {
             var product = await _productRepository.GetAsync(id);
             if (product == null)

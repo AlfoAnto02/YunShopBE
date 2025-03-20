@@ -8,6 +8,6 @@ using Model.Entities;
 namespace Application.Abstractions {
     public interface IProductSizeService : GeneralService<ProductSize>
     {
-
+        Task AddRelationsAsync(List<ProductSize> productSizes);
     }
 }

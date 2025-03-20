@@ -9,22 +9,20 @@ using Model.Repositories;
 
 namespace Application.Services {
     public class ProductSizeService : IProductSizeService {
-        private readonly IProductService _productService;
-        private readonly ISizeService _sizeService;
         private readonly ProductSizeRepository _productSizeRepository;
-        public ProductSizeService(IProductService productService, ISizeService sizeService, ProductSizeRepository productSizeRepository) {
-            this._productService = productService;
-            this._sizeService = sizeService;
+        public ProductSizeService(ProductSizeRepository productSizeRepository) {
             this._productSizeRepository = productSizeRepository;
         }
 
         public async Task AddAsync(ProductSize entity) {
-            var product = await _productService.GetAsync(entity.ProductId);
-            var size = await _sizeService.GetAsync(entity.SizeId);
-            product.ProductSizes.Add(new ProductSize { Product = product, Size = size });
             _productSizeRepository.Add(entity);
-            await _productService.UpdateAsync(entity.ProductId, product);
             await _productSizeRepository.SaveChangesAsync();
+        }
+
+        public async Task AddRelationsAsync(List<ProductSize> productSizes) {
+            foreach (var productSize in productSizes) {
+                await AddAsync(productSize);
+            }
         }
 
         public async Task<IEnumerable<ProductSize>> GetAllAsync()

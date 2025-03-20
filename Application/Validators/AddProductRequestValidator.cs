@@ -29,7 +29,12 @@ namespace Application.Validators {
                 .NotEmpty()
                 .WithMessage("Name is required")
                 .MaximumLength(100)
-                .WithMessage("Name can't be longer than 100 characters");
+                .WithMessage("Name can't be longer than 100 characters")
+                .MustBeUniqueName(name => {
+                    var product = _productRepository.GetByName(name).Result;
+                    if (product == null) return true;
+                    return product.Name != name;
+                });
 
             RuleFor(x => x.Description)
                 .NotEmpty()
