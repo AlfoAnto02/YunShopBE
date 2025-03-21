@@ -17,5 +17,9 @@ namespace Model.Repositories {
             var productSizes = await _context.ProductSizes.Include(p => p.Product).ToListAsync();
             return productSizes;
         }
+
+        public void AddRange(IEnumerable<ProductSize> entities) {
+            _context.ProductSizes.AddRange(entities);
+        }
     }
 }

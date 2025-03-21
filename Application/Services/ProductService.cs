@@ -26,22 +26,12 @@ namespace Application.Services {
         {
             _productRepository.Add(entity);
             await _productRepository.SaveChangesAsync();
-            var productSizes = new List<ProductSize>();
-            foreach (var ids in sizes) {
-                var size = await _sizeService.GetAsync(ids.SizeId);
-                productSizes.Add(new ProductSize {
-                    ProductId = entity.Id,
-                    SizeId = size.Id,
-                    Stock = ids.Stock,
-                    Price = ids.Price
-                });
-            }
             foreach (var image in entity.Images)
             {
                 image.ProductId = entity.Id;
                 await _imageService.AddAsync(image);
             }
-            await productSizeService.AddRelationsAsync(productSizes);
+            await productSizeService.AddRelationsAsync(entity.Id,sizes);
         }
 
 

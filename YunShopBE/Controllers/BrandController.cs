@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace YunShopBE.Controllers {
             try
             {
                 var brands = await _brandService.GetAllAsync();
+                var brandsDTOs = brands.Select(b => new BrandDTO(b)).ToList();
                 return Ok(ResponseFactory.WithSuccess(brands));
             }
             catch (Exception e)

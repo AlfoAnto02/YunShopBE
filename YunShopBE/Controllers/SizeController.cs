@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace YunShopBE.Controllers
         public async Task<IActionResult> GetAllAsync() {
             try {
                 var sizes = await _sizeService.GetAllAsync();
+                var sizeDtOs = sizes.Select(size => new SizeDTO(size)).ToList();
                 return Ok(ResponseFactory.WithSuccess(sizes));
             }
             catch (Exception e) {
