@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Model.Entities;
 
 namespace Application.Abstractions {
-    public interface ISizeService : GeneralService<Size> {
+    public interface ISizeService : GeneralService<Size>
+    {
+        Task DeleteByIdAsync(int id);
 
     }
 }

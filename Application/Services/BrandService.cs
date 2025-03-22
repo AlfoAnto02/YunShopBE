@@ -28,5 +28,12 @@ namespace Application.Services {
             return await this._brandRepository.GetAsync(id);
         }
 
+        public async Task DeleteByIdAsync(int id)
+        {
+            var brand = await _brandRepository.GetAsync(id);
+            _brandRepository.Delete(brand);
+            await _brandRepository.SaveChangesAsync();
+        }
+
     }
 }

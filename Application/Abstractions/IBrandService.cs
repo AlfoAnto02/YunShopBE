@@ -7,5 +7,6 @@ using Model.Entities;
 
 namespace Application.Abstractions {
     public interface IBrandService : GeneralService<Brand> {
+        Task DeleteByIdAsync(int id);
     }
 }

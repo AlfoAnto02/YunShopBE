@@ -37,5 +37,16 @@ namespace YunShopBE.Controllers
             }
         }
 
+        [HttpDelete("DeleteById/{id}")]
+        public async Task<IActionResult> DeleteByIdAsync(DeleteSizeRequest request) {
+            try {
+                await _sizeService.DeleteByIdAsync(request.SizeId);
+                return Ok(ResponseFactory.WithSuccess("Size Deleted!"));
+            }
+            catch (Exception e) {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+        }
+
     }
 }

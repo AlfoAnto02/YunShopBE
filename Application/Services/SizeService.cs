@@ -25,5 +25,12 @@ namespace Application.Services {
         public async Task<Size> GetAsync(int id) {
             return await _sizeRepository.GetAsync(id);
         }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var size = await _sizeRepository.GetAsync(id);
+            _sizeRepository.Delete(size);
+            await _sizeRepository.SaveChangesAsync();
+        }
     }
 }

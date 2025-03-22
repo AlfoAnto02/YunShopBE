@@ -21,5 +21,9 @@ namespace Model.Repositories {
         public void AddRange(IEnumerable<ProductSize> entities) {
             _context.ProductSizes.AddRange(entities);
         }
+
+        public Task<List<ProductSize>> GetBySizeId(int sizeId) {
+            return _context.ProductSizes.Where(x => x.SizeId == sizeId).ToListAsync();
+        }
     }
 }

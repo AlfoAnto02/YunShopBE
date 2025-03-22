@@ -22,5 +22,8 @@ namespace Model.Repositories {
             var products= await _context.Products.Include(p => p.Images).ToListAsync();
             return products;
         }
+        public Task<List<Product>> GetByBrandId(int brandId) {
+            return _context.Products.Where(x => x.BrandId == brandId).ToListAsync();
+        }
     }
 }

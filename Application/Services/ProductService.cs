@@ -13,12 +13,10 @@ namespace Application.Services {
     public class ProductService : IProductService {
         private readonly ProductRepository _productRepository;
         private readonly IImageService _imageService;
-        private readonly ISizeService _sizeService;
         private readonly IProductSizeService productSizeService;
-        public ProductService(ProductRepository productRepository,IImageService imageService, ISizeService _service, IProductSizeService productSizeService) {
+        public ProductService(ProductRepository productRepository,IImageService imageService, IProductSizeService productSizeService) {
             _productRepository = productRepository;
             _imageService = imageService;
-            _sizeService = _service;
             this.productSizeService = productSizeService;
         }
 

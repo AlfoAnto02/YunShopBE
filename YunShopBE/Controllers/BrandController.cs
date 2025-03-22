@@ -40,5 +40,18 @@ namespace YunShopBE.Controllers {
                 return BadRequest(ResponseFactory.WithError(e));
             }
         }
+
+        [HttpDelete("DeleteById")]
+        public async Task<IActionResult> DeleteByIdAsync(DeleteBrandRequest request) {
+            try
+            {
+                await _brandService.DeleteByIdAsync(request.BrandId);
+                return Ok(ResponseFactory.WithSuccess("Brand Deleted!"));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ResponseFactory.WithError(e));
+            }
+        }
     }
 }
