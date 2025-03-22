@@ -26,6 +26,11 @@ namespace Model.Configurations {
             builder.Property(ps => ps.Price)
                 .HasColumnName("Price")
                 .IsRequired();
+            builder.Property(ps => ps.Express)
+                .HasColumnName("Express");
+            builder.Property(ps => ps.Hide)
+                .HasColumnName("Hide");
+
         }
     }
 }

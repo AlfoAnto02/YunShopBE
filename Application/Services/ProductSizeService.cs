@@ -30,7 +30,9 @@ namespace Application.Services {
                     ProductId = entityId,
                     SizeId = size.Id,
                     Stock = ids.Stock,
-                    Price = ids.Price
+                    Price = ids.Price,
+                    Express = false,
+                    Hide = false,
                 });
             }
             _productSizeRepository.AddRange(productSizes);
