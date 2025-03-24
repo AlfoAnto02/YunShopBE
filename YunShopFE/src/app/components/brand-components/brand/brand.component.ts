@@ -16,8 +16,7 @@ export class BrandComponent {
   addedByUsername: string = '';
 
   deleteBrandRequest: any = {
-    id: 0,
-    userId: 0
+    brandId: 0
   };
 
   constructor(private userService: UserService, private tokenService: TokenService,
@@ -40,8 +39,7 @@ export class BrandComponent {
 
   createDeleteBrandRequest(): void {
     this.deleteBrandRequest = {
-      id: this.brand.id,
-      userId: this.tokenService.getUserIdByToken()
+      brandId: this.brand.id,
     };
   }
 

@@ -11,7 +11,7 @@ export class BrandService {
   GetBrandsUrl = `${environment.baseURL}/Brand/getAll`;
   GetBrandByIdUrl = `${environment.baseURL}/Brand/getById`;
   AddBrandUrl = `${environment.baseURL}/Brand/add`;
-  DeleteBrandByIdUrl = `${environment.baseURL}/Brand/delete`;
+  DeleteBrandByIdUrl = `${environment.baseURL}/Brand/DeleteById`;
 
   constructor(private httpClient: HttpClient) { }
 

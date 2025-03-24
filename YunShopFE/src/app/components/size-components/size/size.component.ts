@@ -16,8 +16,7 @@ export class SizeComponent {
   addedByUsername: string = '';
 
   deleteSizeRequest: any = {
-    id: 0,
-    userId: 0
+    sizeId: 0
   };
 
   constructor(private userService: UserService, private tokenService: TokenService,
@@ -40,8 +39,7 @@ export class SizeComponent {
 
   createDeleteSizeRequest(): void {
     this.deleteSizeRequest = {
-      size: this.size.id,
-      userId: this.tokenService.getUserIdByToken()
+      sizeId: this.size.id
     };
   }
 

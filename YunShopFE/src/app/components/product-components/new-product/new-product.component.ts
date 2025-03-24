@@ -28,33 +28,18 @@ export class NewProductComponent {
     brandId: 0,
     sizes: []
   };
-
   name: string = '';
   description: string = '';
-
   imageUrl: string = '';
   addImageRequest: addImageRequest = {
     url: ''
   };
   images: addImageRequest[] = [];
-
   category: string = '';
   categories: Category[] = [];
-
   userId: number = 0;
-
   brand: string = '';
   brands: Brand[] = [];
-
-  productSizeRequests: addProductSizeRequest[] = [];
-
-  sizes: Size[] = [];
-  sizeValue: string = '';
-
-  stock: number = 0;
-  price: number = 0;
-  express: boolean = false;
-  hide: boolean = false;
 
   addProductSizeRequestBoxes: any[] = [
     {
@@ -65,6 +50,14 @@ export class NewProductComponent {
       hide: false,
     }
   ];
+  productSizeRequests: addProductSizeRequest[] = [];
+  sizes: Size[] = [];
+  sizeValue: string = '';
+  stock: number = 0;
+  price: number = 0;
+  express: boolean = true;
+  hide: boolean = false;
+
 
   constructor(private router: Router, private ProductService: ProductService,
     private TokenService: TokenService, private CategoryService: CategoryService,

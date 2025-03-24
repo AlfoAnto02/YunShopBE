@@ -10,6 +10,5 @@ export interface addSizeRequest {
 }
 
 export interface deleteSizeRequest {
-    id: number;
-    userId: number;
+    sizeId: number;
 }

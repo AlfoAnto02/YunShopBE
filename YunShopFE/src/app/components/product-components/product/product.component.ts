@@ -14,6 +14,7 @@ import { TokenService } from '../../../services/token.service';
 
 export class ProductComponent {
   @Input() product!: Product;
+  
   deleteProductRequest: deleteProductRequest = {
     ProductId: 0,
     UserId: 0

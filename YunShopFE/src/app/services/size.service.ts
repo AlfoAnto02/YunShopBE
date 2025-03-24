@@ -11,7 +11,7 @@ export class SizeService {
   GetSizesUrl = `${environment.baseURL}/Size/getAll`;
   GetSizeByIdUrl = `${environment.baseURL}/Size/getById`;
   AddSizeUrl = `${environment.baseURL}/Size/add`;
-  DeleteSizeByIdUrl = `${environment.baseURL}/Size/delete`;
+  DeleteSizeByIdUrl = `${environment.baseURL}/Size/DeleteById`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -30,7 +30,6 @@ export class SizeService {
   }
 
   addSize(addSizeRequest: addSizeRequest): Observable<Size> {
-
     return this.httpClient.post<Size>(this.AddSizeUrl, addSizeRequest)
       .pipe(
         catchError(this.handleError)
@@ -38,8 +37,7 @@ export class SizeService {
   }
 
   deleteSize(deleteSizeRequest: deleteSizeRequest): Observable<Size> {
-
-    return this.httpClient.delete<Size>(this.DeleteSizeByIdUrl, { body: deleteSizeRequest })
+    return this.httpClient.delete<Size>(`${this.DeleteSizeByIdUrl}/${deleteSizeRequest.sizeId}`, { body: deleteSizeRequest })
       .pipe(
         catchError(this.handleError)
       );

@@ -10,6 +10,5 @@ export interface addBrandRequest {
 }
 
 export interface deleteBrandRequest {
-    id: number;
-    userId: number;
+    brandId: number;
 }
