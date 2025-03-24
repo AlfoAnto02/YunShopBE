@@ -16,7 +16,7 @@ export class SizeComponent {
   addedByUsername: string = '';
 
   deleteSizeRequest: any = {
-    size: '',
+    id: 0,
     userId: 0
   };
 
@@ -40,7 +40,7 @@ export class SizeComponent {
 
   createDeleteSizeRequest(): void {
     this.deleteSizeRequest = {
-      size: this.size.size,
+      size: this.size.id,
       userId: this.tokenService.getUserIdByToken()
     };
   }

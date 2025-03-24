@@ -45,6 +45,7 @@ export class NewBrandComponent {
 
   onSubmit() {
     this.createAddBrandRequest()
+    console.log('Creating Brand:', this.addBrandRequest);
     this.BrandsService.addBrand(this.addBrandRequest)
       .subscribe({
         next: response => {

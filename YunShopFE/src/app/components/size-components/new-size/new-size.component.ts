@@ -13,10 +13,10 @@ import { TokenService } from '../../../services/token.service';
   styleUrl: './new-size.component.scss'
 })
 export class NewSizeComponent {
-  size: string = '';
+  sizeValue: string = '';
   currentUserId: number = 0;
   addSizeRequest: addSizeRequest = {
-    size: '',
+    sizeValue: '',
     addedBy: 0
   };
 
@@ -35,28 +35,29 @@ export class NewSizeComponent {
     }
   }
 
-  createAddBrandRequest(): void {
+  createAddSizeRequest(): void {
     this.addSizeRequest =
     {
-      size: this.size,
+      sizeValue: this.sizeValue,
       addedBy: this.currentUserId
     };
   }
 
   onSubmit() {
-    this.createAddBrandRequest()
+    this.createAddSizeRequest()
+    console.log('Creating Size:', this.addSizeRequest);
     this.SizeService.addSize(this.addSizeRequest)
       .subscribe({
         next: response => {
           console.log('Size created successfully:', response);
           alert('Size created successfully');
-          this.size = '';
+          this.sizeValue = '';
           this.router.navigate(['/New-Size']);
         },
         error: error => {
           console.error('Error creating Size:', error);
           alert('Error creating Size: ' + (error.error?.message || 'Unknown error'));
-          this.size = '';
+          this.sizeValue = '';
         }
       });
   }

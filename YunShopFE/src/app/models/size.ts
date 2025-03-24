@@ -1,11 +1,11 @@
 export interface Size {
     id: number;
-    size: string;
+    sizeValue: string;
     addedBy: number;
 }
 
 export interface addSizeRequest {
-    size: string;
+    sizeValue: string;
     addedBy: number;
 }
 

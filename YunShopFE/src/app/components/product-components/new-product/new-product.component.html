@@ -48,12 +48,13 @@
                 </div>
 
                 <!-- Contorno per Size, Price, Stock e Checkbox -->
-                <div *ngFor="let box of boxes; let i = index" class="input-group bordered-box">
+                <div *ngFor="let box of addProductSizeRequestBoxes; let i = index" class="input-group bordered-box">
                     <div class="input-group three-columns">
                         <div class="input-group">
-                            <label for="size-{{i}}">Size</label>
-                            <select id="size-{{i}}" name="size-{{i}}" [(ngModel)]="box.size" required>
-                                <option *ngFor="let size of sizes" [value]="size.size">{{ size.size }}</option>
+                            <label for="sizeValue-{{i}}">Size</label>
+                            <select id="sizeValue-{{i}}" name="sizeValue-{{i}}" [(ngModel)]="box.sizeValue" required>
+                                <option *ngFor="let size of sizes" [value]="size.sizeValue">{{ size.sizeValue }}
+                                </option>
                             </select>
                         </div>
                         <div class="input-group">
@@ -75,10 +76,6 @@
                         <div class="input-group checkbox-group">
                             <label for="hide-{{i}}">Hide</label>
                             <input type="checkbox" id="hide-{{i}}" name="hide-{{i}}" [(ngModel)]="box.hide">
-                        </div>
-                        <div class="input-group checkbox-group">
-                            <label for="oos-{{i}}">OoS</label>
-                            <input type="checkbox" id="oos-{{i}}" name="oos-{{i}}" [(ngModel)]="box.oos">
                         </div>
                     </div>
                 </div>

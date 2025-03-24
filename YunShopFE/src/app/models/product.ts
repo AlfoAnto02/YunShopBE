@@ -1,29 +1,50 @@
 export interface Product {
   id: number;
   name: string;
-  price: number;
-  size: number;
   description: string;
-  brand: string;
-  imageUrls: addProductRequest[];
+  categoryName: string;
   createdAt: Date;
   updatedAt: Date;
+  images: image[];
   categoryId: number;
+  addedBy: number;
+  brandId: number;
+  sizes: productSize[];
+}
+
+export interface image {
+  id: number;
+  url: string;
+  productId: number;
+}
+
+export interface productSize {
+  id: number;
+  productId: number;
+  sizeId: number;
   stock: number;
-  userId: number;
+  price: number;
+  express: boolean;
+  hide: boolean;
 }
 
 export interface addProductRequest {
   name: string;
-  price: number;
-  size: number;
   description: string;
-  brand: string;
   images: addImageRequest[];
   categoryId: number;
-  stock: number;
   userId: number;
-  }
+  brandId: number;
+  sizes: addProductSizeRequest[];
+}
+
+export interface addProductSizeRequest {
+  sizeId: number;
+  stock: number;
+  price: number;
+  express: boolean;
+  hide: boolean;
+}
 
 export interface deleteProductRequest {
   ProductId: number;
