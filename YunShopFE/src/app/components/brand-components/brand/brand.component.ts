@@ -48,7 +48,16 @@ export class BrandComponent {
     console.log('Deleting Brand:', this.deleteBrandRequest);
     this.brandService.deleteBrand(this.deleteBrandRequest).subscribe({
       next: (response: any) => {
-        console.log('brand deleted:', response);
+        console.log('Brand deleted:', response);
+        
+        // Remove the brand from localStorage
+        const cachedBrands = localStorage.getItem('brands');
+        if (cachedBrands) {
+          let brands = JSON.parse(cachedBrands);
+          brands = brands.filter((brand: Brand) => brand.id !== this.brand.id);
+          localStorage.setItem('brands', JSON.stringify(brands));
+        }
+        
         window.location.reload();
       },
       error: (error: any) => {

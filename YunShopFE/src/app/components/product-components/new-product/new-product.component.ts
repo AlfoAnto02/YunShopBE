@@ -74,54 +74,75 @@ export class NewProductComponent {
   }
 
   loadCategories(): void {
-    this.CategoryService.getCategories().subscribe({
-      next: (response: any) => {
-        if (response && Array.isArray(response.result)) {
-          this.categories = response.result;
-          console.log('Categories loaded:', this.categories);
-        } else {
-          console.error('Expected an array of categories, but got:', response);
-          this.categories = [];
+    const cachedCategories = localStorage.getItem('categories');
+    if (cachedCategories) {
+      this.categories = JSON.parse(cachedCategories);
+      console.log('Categories loaded from localStorage:', this.categories);
+    } else {
+      this.CategoryService.getCategories().subscribe({
+        next: (response: any) => {
+          if (response && Array.isArray(response.result)) {
+            this.categories = response.result;
+            localStorage.setItem('categories', JSON.stringify(this.categories));
+            console.log('Categories loaded from API:', this.categories);
+          } else {
+            console.error('Expected an array of categories, but got:', response);
+            this.categories = [];
+          }
+        },
+        error: (error: any) => {
+          console.error('Error loading categories:', error);
         }
-      },
-      error: (error: any) => {
-        console.error('Error loading categories:', error);
-      }
-    });
+      });
+    }
   }
 
   loadBrands(): void {
-    this.BrandService.getBrands().subscribe({
-      next: (response: any) => {
-        if (response && Array.isArray(response.result)) {
-          this.brands = response.result;
-          console.log('Brands loaded:', this.brands);
-        } else {
-          console.error('Expected an array of brands, but got:', response);
-          this.brands = [];
+    const cachedBrands = localStorage.getItem('brands');
+    if (cachedBrands) {
+      this.brands = JSON.parse(cachedBrands);
+      console.log('Brands loaded from localStorage:', this.brands);
+    } else {
+      this.BrandService.getBrands().subscribe({
+        next: (response: any) => {
+          if (response && Array.isArray(response.result)) {
+            this.brands = response.result;
+            localStorage.setItem('brands', JSON.stringify(this.brands));
+            console.log('Brands loaded from API:', this.brands);
+          } else {
+            console.error('Expected an array of brands, but got:', response);
+            this.brands = [];
+          }
+        },
+        error: (error: any) => {
+          console.error('Error loading brands:', error);
         }
-      },
-      error: (error: any) => {
-        console.error('Error loading brands:', error);
-      }
-    });
+      });
+    }
   }
 
   loadSizes(): void {
-    this.SizeService.getSizes().subscribe({
-      next: (response: any) => {
-        if (response && Array.isArray(response.result)) {
-          this.sizes = response.result;
-          console.log('Sizes loaded:', this.sizes);
-        } else {
-          console.error('Expected an array of sizes, but got:', response);
-          this.sizes = [];
+    const cachedSizes = localStorage.getItem('sizes');
+    if (cachedSizes) {
+      this.sizes = JSON.parse(cachedSizes);
+      console.log('Sizes loaded from localStorage:', this.sizes);
+    } else {
+      this.SizeService.getSizes().subscribe({
+        next: (response: any) => {
+          if (response && Array.isArray(response.result)) {
+            this.sizes = response.result;
+            localStorage.setItem('sizes', JSON.stringify(this.sizes));
+            console.log('Sizes loaded from API:', this.sizes);
+          } else {
+            console.error('Expected an array of sizes, but got:', response);
+            this.sizes = [];
+          }
+        },
+        error: (error: any) => {
+          console.error('Error loading sizes:', error);
         }
-      },
-      error: (error: any) => {
-        console.error('Error loading sizes:', error);
-      }
-    });
+      });
+    }
   }
 
   addImageUrl(): void {

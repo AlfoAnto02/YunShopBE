@@ -44,16 +44,25 @@ export class CategoryComponent {
   }
 
   deleteCategory(): void {
-    this.createDeleteCategoryRequest();
-    console.log('Deleting category:', this.deleteCategoryRequest);
-    this.categoryService.deleteCategory(this.deleteCategoryRequest).subscribe({
-      next: (response: any) => {
-        console.log('Category deleted:', response);
-        window.location.reload();
-      },
-      error: (error: any) => {
-        console.error('Error deleting category:', error);
+        this.createDeleteCategoryRequest();
+        console.log('Deleting Category:', this.deleteCategory);
+        this.categoryService.deleteCategory(this.deleteCategoryRequest).subscribe({
+          next: (response: any) => {
+            console.log('Category deleted:', response);
+            
+            // Remove the cateogry from localStorage
+            const cachedCategories = localStorage.getItem('categories');
+            if (cachedCategories) {
+              let categories = JSON.parse(cachedCategories);
+              categories = categories.filter((category: Category) => category.id !== this.category.id);
+              localStorage.setItem('categories', JSON.stringify(categories));
+            }
+            
+            window.location.reload();
+          },
+          error: (error: any) => {
+            console.error('Error deleting Category:', error);
+          }
+        });
       }
-    });
-  }
 }

@@ -21,11 +21,29 @@ export class SizesListComponent {
   }
 
   loadSizes(): void {
+    if (this.loadSizesFromLocalStorage()) {
+      console.log('Sizes loaded from localStorage:', this.sizes);
+    } else {
+      this.loadSizesFromDatabase();
+    }
+  }
+
+  loadSizesFromLocalStorage(): boolean {
+    const cachedSizes = localStorage.getItem('sizes');
+    if (cachedSizes) {
+      this.sizes = JSON.parse(cachedSizes);
+      return true;
+    }
+    return false;
+  }
+
+  loadSizesFromDatabase(): void {
     this.SizeService.getSizes().subscribe({
       next: (response: any) => {
         if (response && Array.isArray(response.result)) {
           this.sizes = response.result;
-          console.log('Sizes loaded:', this.sizes);
+          localStorage.setItem('sizes', JSON.stringify(this.sizes));
+          console.log('Sizes loaded from API:', this.sizes);
         } else {
           console.error('Expected an array of sizes, but got:', response);
           this.sizes = [];

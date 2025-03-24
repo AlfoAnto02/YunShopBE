@@ -14,18 +14,36 @@ import { RouterLink } from '@angular/router';
 export class BrandsListComponent {
   brands: Brand[] = [];
 
-  constructor(private BrandsService: BrandService) { }
+  constructor(private BrandService: BrandService) { }
 
   ngOnInit(): void {
     this.loadBrands();
   }
 
   loadBrands(): void {
-    this.BrandsService.getBrands().subscribe({
+    if (this.loadBrandsFromLocalStorage()) {
+      console.log('Brands loaded from localStorage:', this.brands);
+    } else {
+      this.loadBrandsFromDatabase();
+    }
+  }
+
+  loadBrandsFromLocalStorage(): boolean {
+    const cachedBrands = localStorage.getItem('brands');
+    if (cachedBrands) {
+      this.brands = JSON.parse(cachedBrands);
+      return true;
+    }
+    return false;
+  }
+
+  loadBrandsFromDatabase(): void {
+    this.BrandService.getBrands().subscribe({
       next: (response: any) => {
         if (response && Array.isArray(response.result)) {
           this.brands = response.result;
-          console.log('Brands loaded:', this.brands);
+          localStorage.setItem('brands', JSON.stringify(this.brands));
+          console.log('Brands loaded from API:', this.brands);
         } else {
           console.error('Expected an array of brands, but got:', response);
           this.brands = [];

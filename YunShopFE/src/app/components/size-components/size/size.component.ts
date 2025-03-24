@@ -44,16 +44,25 @@ export class SizeComponent {
   }
 
   deleteSize(): void {
-    this.createDeleteSizeRequest();
-    console.log('Deleting Size:', this.deleteSizeRequest);
-    this.sizeService.deleteSize(this.deleteSizeRequest).subscribe({
-      next: (response: any) => {
-        console.log('Size deleted:', response);
-        window.location.reload();
-      },
-      error: (error: any) => {
-        console.error('Error deleting Size:', error);
-      }
-    });
-  }
+      this.createDeleteSizeRequest();
+      console.log('Deleting Size:', this.deleteSizeRequest);
+      this.sizeService.deleteSize(this.deleteSizeRequest).subscribe({
+        next: (response: any) => {
+          console.log('Size deleted:', response);
+          
+          // Remove the size from localStorage
+          const cachedSizes = localStorage.getItem('sizes');
+          if (cachedSizes) {
+            let sizes = JSON.parse(cachedSizes);
+            sizes = sizes.filter((size: Size) => size.id !== this.size.id);
+            localStorage.setItem('sizes', JSON.stringify(sizes));
+          }
+          
+          window.location.reload();
+        },
+        error: (error: any) => {
+          console.error('Error deleting Size:', error);
+        }
+      });
+    }
 }

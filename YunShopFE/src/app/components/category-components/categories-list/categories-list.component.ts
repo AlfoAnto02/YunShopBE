@@ -21,11 +21,29 @@ export class CategoriesListComponent {
   }
 
   loadCategories(): void {
+    if (this.loadCategoriesFromLocalStorage()) {
+      console.log('Categories loaded from localStorage:', this.categories);
+    } else {
+      this.loadCategoriesFromDatabase();
+    }
+  }
+
+  loadCategoriesFromLocalStorage(): boolean {
+    const cachedCategories = localStorage.getItem('categories');
+    if (cachedCategories) {
+      this.categories = JSON.parse(cachedCategories);
+      return true;
+    }
+    return false;
+  }
+
+  loadCategoriesFromDatabase(): void {
     this.CategoriesService.getCategories().subscribe({
       next: (response: any) => {
         if (response && Array.isArray(response.result)) {
           this.categories = response.result;
-          console.log('Categories loaded:', this.categories);
+          localStorage.setItem('categories', JSON.stringify(this.categories));
+          console.log('categories loaded from API:', this.categories);
         } else {
           console.error('Expected an array of categories, but got:', response);
           this.categories = [];
