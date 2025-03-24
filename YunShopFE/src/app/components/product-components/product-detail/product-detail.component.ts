@@ -37,16 +37,12 @@ export class ProductDetailComponent implements OnInit {
   prevImage(): void {
     if (this.currentImageIndex > 0) {
       this.currentImageIndex--;
-    } else {
-      this.currentImageIndex = this.product.product.imageUrls.length - 1;
     }
   }
 
   nextImage(): void {
     if (this.currentImageIndex < this.product.product.imageUrls.length - 1) {
       this.currentImageIndex++;
-    } else {
-      this.currentImageIndex = 0;
     }
   }
 
