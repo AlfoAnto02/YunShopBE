@@ -57,7 +57,7 @@ namespace Application.Validators {
                 .WithMessage("Sizes are required")
                 .Custom(SizeExists);
 
-            RuleFor(x => x.UserId)
+            RuleFor(x => x.AddedBy)
                 .NotEmpty()
                 .WithMessage("User is required")
                 .MustBeAdmin(_userRepository);

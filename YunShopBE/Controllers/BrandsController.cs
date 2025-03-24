@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class BrandController : ControllerBase {
+    public class BrandsController : ControllerBase {
         private readonly IBrandService _brandService;
-        public BrandController(IBrandService brandService) {
+        public BrandsController(IBrandService brandService) {
             _brandService = brandService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync() {
             try
             {
@@ -27,7 +27,7 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpPost("Add")]
+        [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] AddBrandRequest addBrandRequest) {
             try
             {
@@ -41,7 +41,7 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpDelete("DeleteById")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteByIdAsync(DeleteBrandRequest request) {
             try
             {

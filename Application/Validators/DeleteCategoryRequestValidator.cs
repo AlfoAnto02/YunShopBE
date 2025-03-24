@@ -20,9 +20,9 @@ namespace Application.Validators {
                 .NotEmpty()
                 .WithMessage("Name is required")
                 .Custom(CategoryNotReachable);
-            RuleFor(x => x.UserId)
+            RuleFor(x => x.DeletedBy)
                 .NotEmpty()
-                .WithMessage("UserId is required")
+                .WithMessage("AddedBy is required")
                 .MustBeAdmin(_userRepository);
         }
         private void CategoryNotReachable(string name, ValidationContext<DeleteCategoryRequest> context) {

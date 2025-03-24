@@ -11,7 +11,7 @@ namespace Application.Models.Request {
         public string Description { get; set; }
         public List<AddImageRequest> Images { get; set; } = new List<AddImageRequest>();
         public int CategoryId { get; set; }
-        public int UserId { get; set; }
+        public int AddedBy { get; set; }
         public int BrandId { get; set; }
         public List<AddProductSizeRequest> Sizes { get; set; } = new List<AddProductSizeRequest>();
 
@@ -25,7 +25,7 @@ namespace Application.Models.Request {
                 CategoryId = this.CategoryId,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                UserId = UserId,
+                UserId = AddedBy,
                 BrandId = BrandId,
             };
         }

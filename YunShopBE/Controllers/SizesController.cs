@@ -8,12 +8,12 @@ namespace YunShopBE.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SizeController : ControllerBase{ 
+    public class SizesController : ControllerBase{ 
         private readonly ISizeService _sizeService;
-        public SizeController(ISizeService sizeService) {
+        public SizesController(ISizeService sizeService) {
             _sizeService = sizeService;
         }
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync() {
             try {
                 var sizes = await _sizeService.GetAllAsync();
@@ -25,7 +25,7 @@ namespace YunShopBE.Controllers
             }
         }
 
-        [HttpPost("Add")]
+        [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] AddSizeRequest addSizeRequest) {
             try {
                 var size = addSizeRequest.ToEntity();
@@ -37,7 +37,7 @@ namespace YunShopBE.Controllers
             }
         }
 
-        [HttpDelete("DeleteById/{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteByIdAsync(DeleteSizeRequest request) {
             try {
                 await _sizeService.DeleteByIdAsync(request.SizeId);

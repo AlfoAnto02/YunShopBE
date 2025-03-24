@@ -21,9 +21,9 @@ namespace Application.Validators {
                 .NotEmpty()
                 .WithMessage("ProductId is required")
                 .Custom(ProductNotReachable);
-            RuleFor(x => x.UserId)
+            RuleFor(x => x.DeletedBy)
                 .NotEmpty()
-                .WithMessage("UserId is required")
+                .WithMessage("AddedBy is required")
                 .MustBeAdmin(_userRepository);
         }
 

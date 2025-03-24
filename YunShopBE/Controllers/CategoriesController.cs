@@ -12,12 +12,12 @@ namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class CategoryController : ControllerBase {
+    public class CategoriesController : ControllerBase {
         public readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService) {
+        public CategoriesController(ICategoryService categoryService) {
             _categoryService = categoryService;
         }
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest categoryRequest) {
             try {
                 var category = categoryRequest.ToEntity();
@@ -28,8 +28,7 @@ namespace YunShopBE.Controllers {
                 return BadRequest(ResponseFactory.WithError(e));
             }
         }
-        [HttpGet("getAll")]
-        [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> GetCategories() {
             try {
                 var categories = await _categoryService.GetAllAsync();
@@ -40,8 +39,7 @@ namespace YunShopBE.Controllers {
                 return BadRequest(ResponseFactory.WithError(e));
             }
         }
-        [HttpGet("getById")]
-        [AllowAnonymous]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetCategoryById(int id) {
             try {
                 var category = await _categoryService.GetAsync(id);
@@ -56,7 +54,7 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest deleteCategoryRequest) {
             try {
                 await _categoryService.DeleteAsync(deleteCategoryRequest);

@@ -24,7 +24,7 @@ namespace Application.Validators {
                 .MaximumLength(10)
                 .WithMessage("Name must not exceed 50 characters")
                 .Custom(BeUniqueSize);
-            RuleFor(x => x.UserId)
+            RuleFor(x => x.AddedBy)
                 .NotEmpty()
                 .WithMessage("User is required")
                 .MustBeAdmin(_userRepository);

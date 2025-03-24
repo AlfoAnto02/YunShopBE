@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Application.Models.Request {
     public class DeleteProductRequest {
         public int ProductId { get; set; }
-        public int UserId { get; set; }
+        public int DeletedBy { get; set; }
     }
 }
