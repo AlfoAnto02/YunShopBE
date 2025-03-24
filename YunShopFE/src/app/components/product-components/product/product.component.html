@@ -20,7 +20,7 @@
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
                 <!-- View Details button -->
-                <a class="btn btn-outline-primary mt-auto action-button">View Details</a>
+                <a class="btn btn-outline-primary mt-auto action-button" [routerLink]="['/Products', product.id]">View Details</a>
                 <!-- Delete button -->
                 <button class="btn btn-outline-danger mt-auto action-button" (click)="deleteProduct()">Delete</button>
             </div>

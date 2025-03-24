@@ -23,7 +23,7 @@ export class ProductService {
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.httpClient.get<Product>(`${this.GetProductByIdUrl}/${id}`)
+    return this.httpClient.get<Product>(`${this.GetProductByIdUrl}?id=${id}`)
       .pipe(
         catchError(this.handleError)
       );

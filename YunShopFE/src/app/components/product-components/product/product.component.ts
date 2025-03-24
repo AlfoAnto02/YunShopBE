@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouteConfigLoadEnd, RouterLink } from '@angular/router';
+import { RouteConfigLoadEnd, RouterLink, RouterModule } from '@angular/router';
 import { deleteProductRequest, Product } from '../../../models/product';
 import { ProductService } from '../../../services/product.service';
 import { TokenService } from '../../../services/token.service';
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })

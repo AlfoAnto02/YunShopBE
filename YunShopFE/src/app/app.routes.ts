@@ -12,6 +12,7 @@ import { NewBrandComponent } from './components/brand-components/new-brand/new-b
 import { NewSizeComponent } from './components/size-components/new-size/new-size.component';
 import { SizesListComponent } from './components/size-components/sizes-list/sizes-list.component';
 import { BrandsListComponent } from './components/brand-components/brands-list/brands-list.component';
+import { ProductDetailComponent } from './components/product-components/product-detail/product-detail.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,8 +23,9 @@ export const routes: Routes = [
     { path: 'New-Category', component: NewCategoryComponent, canActivate: [AuthGuard] },
     { path: 'Products', component: ProductsListComponent },
     { path: 'New-Product', component: NewProductComponent, canActivate: [AuthGuard] },
-    { path: 'Brands', component: BrandsListComponent, canActivate: [AuthGuard] },
+    { path: 'Products/:id', component: ProductDetailComponent },
+    { path: 'Brands', component: BrandsListComponent },
     { path: 'New-Brand', component: NewBrandComponent, canActivate: [AuthGuard] },
-    { path: 'Sizes', component: SizesListComponent, canActivate: [AuthGuard] },
+    { path: 'Sizes', component: SizesListComponent },
     { path: 'New-Size', component: NewSizeComponent, canActivate: [AuthGuard] },
 ];

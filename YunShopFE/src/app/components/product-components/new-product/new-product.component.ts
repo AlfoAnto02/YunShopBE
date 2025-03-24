@@ -260,6 +260,12 @@ export class NewProductComponent {
     });
   }
 
+  removeLastItem(): void {
+    if (this.addProductSizeRequestBoxes.length > 0) {
+      this.addProductSizeRequestBoxes.pop();
+    }
+  }
+
   resetForm(): void {
     this.name = '';
     this.description = '';
