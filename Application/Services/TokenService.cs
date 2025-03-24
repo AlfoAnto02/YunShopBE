@@ -23,7 +23,8 @@ namespace Application.Services {
             List<Claim> claims = new List<Claim> {
                 new Claim("user_id", createTokenRequest.UserId),
                 new Claim("username", createTokenRequest.Username),
-                new Claim("Email", createTokenRequest.Email)
+                new Claim("Email", createTokenRequest.Email),
+                new Claim("Role", createTokenRequest.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtAuthenticationOption.Key));

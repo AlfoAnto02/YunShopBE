@@ -38,7 +38,8 @@ namespace YunShopBE.Controllers {
             var tokenRequest = new CreateTokenRequest {
                 UserId = user.Id.ToString(),
                 Username = user.Username,
-                Email = user.Email
+                Email = user.Email,
+                Role = user.Role
             };
             var token = await _tokenService.CreateToken(tokenRequest);
             var userResponse = new UserResponse() {
