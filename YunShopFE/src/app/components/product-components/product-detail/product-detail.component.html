@@ -14,18 +14,18 @@
           <button class="btn btn-outline-primary position-absolute top-50 start-0 translate-middle-y" (click)="prevImage()" [disabled]="currentImageIndex === 0">
             <span>&lt;</span>
           </button>
-          <img [src]="product.product.imageUrls[currentImageIndex]" class="img-fluid product-image" alt="Product Image">
-          <button class="btn btn-outline-primary position-absolute top-50 end-0 translate-middle-y" (click)="nextImage()" [disabled]="currentImageIndex === product.product.imageUrls.length - 1">
+          <img [src]="product.imageUrls[currentImageIndex]" class="img-fluid product-image" alt="Product Image">
+          <button class="btn btn-outline-primary position-absolute top-50 end-0 translate-middle-y" (click)="nextImage()" [disabled]="currentImageIndex === product.imageUrls.length - 1">
             <span>&gt;</span>
           </button>
         </div>
       </div>
       <div class="col-md-6">
         <!-- Product Details -->
-        <h2 class="fw-bold">{{ product.product.name }}</h2>
-        <p class="text-muted">{{ product.product.categoryName }}</p>
-        <p>{{ product.product.description }}</p>
-        <p><strong>Brand:</strong> {{ product.product.brandName }}</p>
+        <h2 class="fw-bold">{{ product.name }}</h2>
+        <p class="text-muted">{{ product.categoryName }}</p>
+        <p>{{ product.description }}</p>
+        <p><strong>Brand:</strong> {{ product.brandName }}</p>
         <!-- Sizes Table -->
         <table class="table table-striped mt-4">
           <thead>
@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let size of product.product.sizes">
+            <tr *ngFor="let size of product.sizes">
               <td>{{ size.size }}</td>
               <td>{{ size.stock }}</td>
               <td>{{ size.price | currency }}</td>

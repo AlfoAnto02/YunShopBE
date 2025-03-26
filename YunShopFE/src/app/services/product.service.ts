@@ -8,36 +8,34 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class ProductService {
-  private GetProductsUrl = `${environment.baseURL}/Product/GetAll`;
-  private GetProductByIdUrl = `${environment.baseURL}/Product/GetById`;
-  private AddProductUrl = `${environment.baseURL}/Product/Add`;
-  private DeleteProductUrl = `${environment.baseURL}/Product/Delete`;
+  private ProductsUrl = `${environment.baseURL}/Products`;
+  private ProductByIdUrl = `${environment.baseURL}/Products/getById`;
 
   constructor(private httpClient : HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.GetProductsUrl)
+    return this.httpClient.get<Product[]>(this.ProductsUrl)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.httpClient.get<Product>(`${this.GetProductByIdUrl}?id=${id}`)
+    return this.httpClient.get<Product>(`${this.ProductByIdUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   addProduct(addProductRequest: addProductRequest): Observable<Product> {
-    return this.httpClient.post<Product>(this.AddProductUrl, addProductRequest)
+    return this.httpClient.post<Product>(this.ProductsUrl, addProductRequest)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteProduct(deleteProductRequest: deleteProductRequest): Observable<Product> {
-    return this.httpClient.delete<Product>(this.DeleteProductUrl, { body: deleteProductRequest })
+    return this.httpClient.delete<Product>(this.ProductsUrl, { body: deleteProductRequest })
       .pipe(
         catchError(this.handleError)
       );

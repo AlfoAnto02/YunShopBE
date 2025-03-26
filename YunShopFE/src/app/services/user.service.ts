@@ -8,9 +8,9 @@ import { TokenService } from './token.service';
   providedIn: 'root'
 })
 export class UserService {
-  LoginUrl = `${environment.baseURL}/User/login`;
-  RegisterUrl = `${environment.baseURL}/User/register`;
-  GetUserByIdUrl = `${environment.baseURL}/User/getbyid`;
+  LoginUrl = `${environment.baseURL}/Users/login`;
+  RegisterUrl = `${environment.baseURL}/Users/register`;
+  GetUserByIdUrl = `${environment.baseURL}/Users`;
 
   constructor(private httpClient : HttpClient, private tokenService: TokenService) { }
 

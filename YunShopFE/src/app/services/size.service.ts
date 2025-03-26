@@ -8,36 +8,33 @@ import { addSizeRequest, deleteSizeRequest, Size } from '../models/size';
   providedIn: 'root'
 })
 export class SizeService {
-  GetSizesUrl = `${environment.baseURL}/Size/getAll`;
-  GetSizeByIdUrl = `${environment.baseURL}/Size/getById`;
-  AddSizeUrl = `${environment.baseURL}/Size/add`;
-  DeleteSizeByIdUrl = `${environment.baseURL}/Size/DeleteById`;
+  private SizesUrl = `${environment.baseURL}/Sizes`;
 
   constructor(private httpClient: HttpClient) { }
 
   getSizes(): Observable<Size[]> {
-    return this.httpClient.get<Size[]>(this.GetSizesUrl)
+    return this.httpClient.get<Size[]>(this.SizesUrl)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getSizeById(id: number): Observable<Size> {
-    return this.httpClient.get<Size>(`${this.GetSizeByIdUrl}/${id}`)
+    return this.httpClient.get<Size>(`${this.SizesUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   addSize(addSizeRequest: addSizeRequest): Observable<Size> {
-    return this.httpClient.post<Size>(this.AddSizeUrl, addSizeRequest)
+    return this.httpClient.post<Size>(this.SizesUrl, addSizeRequest)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteSize(deleteSizeRequest: deleteSizeRequest): Observable<Size> {
-    return this.httpClient.delete<Size>(`${this.DeleteSizeByIdUrl}/${deleteSizeRequest.sizeId}`, { body: deleteSizeRequest })
+    return this.httpClient.delete<Size>(`${this.SizesUrl}/${deleteSizeRequest.sizeId}`, { body: deleteSizeRequest })
       .pipe(
         catchError(this.handleError)
       );

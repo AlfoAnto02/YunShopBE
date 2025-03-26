@@ -33,7 +33,7 @@ export interface addProductRequest {
   description: string;
   images: addImageRequest[];
   categoryId: number;
-  userId: number;
+  addedBy: number;
   brandId: number;
   sizes: addProductSizeRequest[];
 }
@@ -47,8 +47,8 @@ export interface addProductSizeRequest {
 }
 
 export interface deleteProductRequest {
-  ProductId: number;
-  UserId: number;
+  productId: number;
+  deletedBy: number;
 }
 
 export interface addImageRequest {

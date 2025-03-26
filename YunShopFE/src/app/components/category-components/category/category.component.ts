@@ -16,7 +16,7 @@ export class CategoryComponent {
   addedByUsername: string = '';
   deleteCategoryRequest: deleteCategoryRequest = {
     name: '',
-    userId: 0
+    deletedBy: 0
   };
 
   constructor(private userService: UserService, private tokenService: TokenService, private categoryService: CategoryService) { }
@@ -39,7 +39,7 @@ export class CategoryComponent {
   createDeleteCategoryRequest(): void {
     this.deleteCategoryRequest = {
       name: this.category.name,
-      userId: this.tokenService.getUserIdByToken()
+      deletedBy: this.tokenService.getUserIdByToken()
     };
   }
 

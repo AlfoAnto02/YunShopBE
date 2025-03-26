@@ -11,5 +11,5 @@ export interface addCategoryRequest {
 
 export interface deleteCategoryRequest {
     name: string;
-    userId: number;
+    deletedBy: number;
 }

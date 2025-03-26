@@ -24,7 +24,7 @@ export class NewProductComponent {
     description: '',
     images: [],
     categoryId: 0,
-    userId: 0,
+    addedBy: 0,
     brandId: 0,
     sizes: []
   };
@@ -227,7 +227,7 @@ export class NewProductComponent {
       description: this.description,
       images: this.images,
       categoryId: this.getCategoryIdByName(this.category),
-      userId: this.TokenService.getUserIdByToken(),
+      addedBy: this.TokenService.getUserIdByToken(),
       brandId: this.getBrandIdByName(this.brand),
       sizes: this.createAddProductSizeRequest()
     };

@@ -8,22 +8,19 @@ import { addBrandRequest, deleteBrandRequest, Brand } from '../models/brand';
   providedIn: 'root'
 })
 export class BrandService {
-  GetBrandsUrl = `${environment.baseURL}/Brand/getAll`;
-  GetBrandByIdUrl = `${environment.baseURL}/Brand/getById`;
-  AddBrandUrl = `${environment.baseURL}/Brand/add`;
-  DeleteBrandByIdUrl = `${environment.baseURL}/Brand/DeleteById`;
+  private BrandsUrl = `${environment.baseURL}/Brands`;
 
   constructor(private httpClient: HttpClient) { }
 
   getBrands(): Observable<Brand[]> {
-    return this.httpClient.get<Brand[]>(this.GetBrandsUrl)
+    return this.httpClient.get<Brand[]>(this.BrandsUrl)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getBrandById(id: number): Observable<Brand> {
-    return this.httpClient.get<Brand>(`${this.GetBrandByIdUrl}/${id}`)
+    return this.httpClient.get<Brand>(`${this.BrandsUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -31,7 +28,7 @@ export class BrandService {
 
   addBrand(addBrandRequest: addBrandRequest): Observable<Brand> {
 
-    return this.httpClient.post<Brand>(this.AddBrandUrl, addBrandRequest)
+    return this.httpClient.post<Brand>(this.BrandsUrl, addBrandRequest)
       .pipe(
         catchError(this.handleError)
       );
@@ -39,7 +36,7 @@ export class BrandService {
 
   deleteBrand(deleteBrandRequest: deleteBrandRequest): Observable<Brand> {
 
-    return this.httpClient.delete<Brand>(this.DeleteBrandByIdUrl, { body: deleteBrandRequest })
+    return this.httpClient.delete<Brand>(this.BrandsUrl, { body: deleteBrandRequest })
       .pipe(
         catchError(this.handleError)
       );

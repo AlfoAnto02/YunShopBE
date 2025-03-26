@@ -1,68 +1,74 @@
 .container {
-    margin-top: 2rem;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .btn-outline-primary {
-    border-color: #8a4dff; /* Viola */
-    color: #8a4dff;
-    font-weight: 600;
-    border-radius: 5px;  /* Rettangolare */
-    padding: 8px 20px;   /* Ridotto il padding per renderli più stretti */
-    transition: all 0.3s ease;
+  margin-top: 2rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.btn-outline-primary {
+  border-color: #8a4dff; /* Viola */
+  color: #8a4dff;
+  font-weight: 600;
+  border-radius: 5px;  /* Rettangolare */
+  padding: 8px 20px;   /* Ridotto il padding per renderli più stretti */
+  transition: all 0.3s ease;
 }
 
 .btn-outline-primary:hover {
-    background-color: #8a4dff; /* Viola di sfondo */
-    color: white;
-    border-color: #8a4dff;
+  background-color: #8a4dff; /* Viola di sfondo */
+  color: white;
+  border-color: #8a4dff;
 }
 
 .btn-outline-primary:focus {
-    outline: none;
-    box-shadow: 0 0 5px #8a4dff;
+  outline: none;
+  box-shadow: 0 0 5px #8a4dff;
 }
-  
-  h2 {
-    color: #333;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .text-muted {
-    color: #6c757d;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .table {
-    margin-top: 1.5rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  
-  .table th, .table td {
-    vertical-align: middle;
-    text-align: center;
-  }
-  
-  .table th {
-    background-color: #f8f9fa;
-  }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  .table-striped tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
 
-  .product-images {
-    position: relative;
-    .product-image {
-      max-width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-    }
-  }
+h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.text-muted {
+  color: #6c757d;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.table {
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-striped tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.product-images {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px; /* Imposta un'altezza fissa per l'immagine */
+  overflow: hidden;
+}
+
+.product-image {
+  width: 70%; /* L'immagine occuperà tutta la larghezza del contenitore */
+  height: 80%; /* L'immagine occuperà tutta l'altezza del contenitore */
+  object-fit: cover; /* Ritaglia l'immagine se necessario per adattarsi al contenitore */
+}

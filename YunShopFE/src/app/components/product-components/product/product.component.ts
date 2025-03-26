@@ -16,16 +16,16 @@ export class ProductComponent {
   @Input() product!: Product;
   
   deleteProductRequest: deleteProductRequest = {
-    ProductId: 0,
-    UserId: 0
+    productId: 0,
+    deletedBy: 0
   };
 
   constructor(private productService:ProductService, private tokenService: TokenService) { }
 
   createDeleteProductRequest(): void {
     this.deleteProductRequest = {
-      ProductId: this.product.id,
-      UserId: this.tokenService.getUserIdByToken()
+      productId: this.product.id,
+      deletedBy: this.tokenService.getUserIdByToken()
     };
   }
   

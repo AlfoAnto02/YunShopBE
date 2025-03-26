@@ -10,22 +10,19 @@ import { addCategoryRequest } from '../models/category';
   providedIn: 'root'
 })
 export class CategoryService {
-  GetCategoriesUrl = `${environment.baseURL}/Category/getAll`;
-  GetCategoryByIdUrl = `${environment.baseURL}/Category/getById`;
-  AddCategoryUrl = `${environment.baseURL}/Category/add`;
-  DeleteCategoryByNameUrl = `${environment.baseURL}/Category/delete`;
+  private CategoriesUrl = `${environment.baseURL}/Categories`;
 
   constructor(private httpClient: HttpClient, private tokenService: TokenService) { }
 
   getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.GetCategoriesUrl)
+    return this.httpClient.get<Category[]>(this.CategoriesUrl)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   getCategoryById(id: number): Observable<Category> {
-    return this.httpClient.get<Category>(`${this.GetCategoryByIdUrl}/${id}`)
+    return this.httpClient.get<Category>(`${this.CategoriesUrl}/${id}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -33,7 +30,7 @@ export class CategoryService {
 
   addCategory(addCategoryRequest: addCategoryRequest): Observable<Category> {
 
-    return this.httpClient.post<Category>(this.AddCategoryUrl, addCategoryRequest)
+    return this.httpClient.post<Category>(this.CategoriesUrl, addCategoryRequest)
       .pipe(
         catchError(this.handleError)
       );
@@ -41,7 +38,7 @@ export class CategoryService {
 
   deleteCategory(deleteCategoryRequest: deleteCategoryRequest): Observable<Category> {
 
-    return this.httpClient.delete<Category>(this.DeleteCategoryByNameUrl, { body: deleteCategoryRequest })
+    return this.httpClient.delete<Category>(this.CategoriesUrl, { body: deleteCategoryRequest })
       .pipe(
         catchError(this.handleError)
       );

@@ -26,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
   getProductById(id: number): void {
     this.ProductService.getProductById(id).subscribe({
       next: (response: any) => {
-        this.product = response.result;
+        this.product = response.result.product;
+        console.log('Product:', this.product);
       },
       error: (error: any) => {
         console.error('Error getting product:', error);
@@ -41,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   nextImage(): void {
-    if (this.currentImageIndex < this.product.product.imageUrls.length - 1) {
+    if (this.currentImageIndex < this.product.imageUrls.length - 1) {
       this.currentImageIndex++;
     }
   }
