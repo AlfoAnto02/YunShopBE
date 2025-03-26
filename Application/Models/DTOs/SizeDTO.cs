@@ -8,12 +8,12 @@ namespace Application.Models.DTOs {
     public class SizeDTO {
         public int Id { get; set; }
         public string SizeValue { get; set; }
-        public int UserId { get; set; }
+        public int AddedBy { get; set; }
 
         public SizeDTO(Model.Entities.Size size) {
             Id = size.Id;
             SizeValue = size.SizeValue;
-            UserId = size.UserId;
+            AddedBy = size.UserId;
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Application.Validators {
     public class DeleteBrandRequestValidator : AbstractValidator<DeleteBrandRequest> {
         private readonly BrandRepository _brandRepository;
         private readonly ProductRepository _productRepository;
-        public DeleteBrandRequestValidator (BrandRepository _brandRepository) {
+        public DeleteBrandRequestValidator (BrandRepository _brandRepository, ProductRepository _productRepository) {
             this._brandRepository = _brandRepository;
-
+            this._productRepository = _productRepository;
             RuleFor(x => x.BrandId)
                 .NotEmpty()
                 .WithMessage("Brand is required")
