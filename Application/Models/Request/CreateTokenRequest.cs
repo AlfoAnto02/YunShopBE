@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Application.Models.Request {
     public class CreateTokenRequest
     {
-        public string userId { get; set; } = string.Empty;
-        public string userName { get; set; } = string.Empty;
-        public string email { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
 
     }
 }

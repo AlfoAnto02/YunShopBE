@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         public readonly IUserService _userService;
         public readonly ITokenService _tokenService;
 
-        public UserController(IUserService userService, ITokenService _token)
+        public UsersController(IUserService userService, ITokenService _token)
         {
             _userService = userService;
             _tokenService = _token;
@@ -36,9 +36,10 @@ namespace YunShopBE.Controllers {
         try {
             var user = await _userService.VerifyUserAsync(loginRequest);
             var tokenRequest = new CreateTokenRequest {
-                userId = user.Id.ToString(),
-                userName = user.Username,
-                email = user.Email
+                UserId = user.Id.ToString(),
+                Username = user.Username,
+                Email = user.Email,
+                Role = user.Role
             };
             var token = await _tokenService.CreateToken(tokenRequest);
             var userResponse = new UserResponse() {
@@ -52,7 +53,7 @@ namespace YunShopBE.Controllers {
         }
         }
 
-        [HttpGet("getbyid/{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             try {

@@ -13,10 +13,17 @@ namespace Model.Repositories {
         public ProductRepository(MyDbContext context) : base(context) {
         }
 
+        public async Task<Product> GetByName(string name) {
+            return await _context.Products.FirstOrDefaultAsync(x => x.Name == name);
+        }
+
         public async Task<List<Product>> GetProductsWithImages()
         {
             var products= await _context.Products.Include(p => p.Images).ToListAsync();
             return products;
+        }
+        public Task<List<Product>> GetByBrandId(int brandId) {
+            return _context.Products.Where(x => x.BrandId == brandId).ToListAsync();
         }
     }
 }

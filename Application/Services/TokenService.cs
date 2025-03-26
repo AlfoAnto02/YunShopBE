@@ -21,9 +21,10 @@ namespace Application.Services {
 
         public async Task<string> CreateToken(CreateTokenRequest createTokenRequest) {
             List<Claim> claims = new List<Claim> {
-                new Claim("user_id", createTokenRequest.userId),
-                new Claim("username", createTokenRequest.userName),
-                new Claim("email", createTokenRequest.email)
+                new Claim("user_id", createTokenRequest.UserId),
+                new Claim("username", createTokenRequest.Username),
+                new Claim("Email", createTokenRequest.Email),
+                new Claim("Role", createTokenRequest.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtAuthenticationOption.Key));

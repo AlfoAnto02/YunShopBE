@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProductController : ControllerBase{
+    public class ProductsController : ControllerBase {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService) {
+        public ProductsController(IProductService productService) {
             _productService = productService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync() {
             try
             {
@@ -27,7 +27,7 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("byId/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id) {
             try
             {
@@ -44,12 +44,12 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync([FromBody] AddProductRequest addProductRequest) {
+        [HttpPost]
+        public async Task<IActionResult> AddProductsAsync([FromBody] AddProductsRequest addProductRequest) {
             try
             {
                 var product = addProductRequest.ToEntity();
-                await _productService.AddAsync(product);
+                await _productService.AddAsync(product, addProductRequest.Sizes);
                 return Ok(ResponseFactory.WithSuccess("Product Added!"));
             }
             catch (Exception e)
@@ -58,12 +58,12 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteAsync([FromBody] DeleteProductRequest deleteProductRequest)
         {
             try
             {
-                await _productService.DeleteAsync(deleteProductRequest.ProductId, deleteProductRequest.UserId);
+                await _productService.DeleteAsync(deleteProductRequest.ProductId, deleteProductRequest.DeletedBy);
                 return Ok(ResponseFactory.WithSuccess("Product Deleted!"));
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace YunShopBE.Controllers {
 
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductRequest updateProductRequest)
         {
             try

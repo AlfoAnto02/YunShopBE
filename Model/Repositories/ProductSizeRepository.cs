@@ -17,5 +17,13 @@ namespace Model.Repositories {
             var productSizes = await _context.ProductSizes.Include(p => p.Product).ToListAsync();
             return productSizes;
         }
+
+        public void AddRange(IEnumerable<ProductSize> entities) {
+            _context.ProductSizes.AddRange(entities);
+        }
+
+        public Task<List<ProductSize>> GetBySizeId(int sizeId) {
+            return _context.ProductSizes.Where(x => x.SizeId == sizeId).ToListAsync();
+        }
     }
 }

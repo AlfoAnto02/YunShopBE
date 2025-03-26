@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Models.Request {
-    public class UpdateProductRequest {
-        public int Id { get; set; }
-        public AddProductsRequest Product { get; set; }
+    public class DeleteSizeRequest {
+        public int SizeId { get; set; }
     }
 }

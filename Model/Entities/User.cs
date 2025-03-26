@@ -24,5 +24,7 @@ namespace Model.Entities {
         public virtual ICollection<Product> ProductCreated { get; set; }
         [JsonIgnore]
         public virtual ICollection<Brand> BrandCreated { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Size> SizeCreated { get; set; }
     }
 }

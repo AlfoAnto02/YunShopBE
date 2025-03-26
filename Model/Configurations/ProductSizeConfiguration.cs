@@ -10,19 +10,27 @@ using Model.Entities;
 namespace Model.Configurations {
     public class ProductSizeConfiguration : IEntityTypeConfiguration<ProductSize> {
         public void Configure(EntityTypeBuilder<ProductSize> builder) {
+            builder.ToTable("ProductSize");
             builder.HasKey(ps => ps.Id);
             builder.HasOne(ps => ps.Product)
                 .WithMany(p => p.ProductSizes)
-                .HasForeignKey(ps => ps.ProductId);
+                .HasForeignKey(ps => ps.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(ps => ps.Size)
                 .WithMany(s => s.ProductSizes)
-                .HasForeignKey(ps => ps.SizeId);
+                .HasForeignKey(ps => ps.SizeId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Property(ps => ps.Stock)
                 .HasColumnName("Stock")
                 .IsRequired();
             builder.Property(ps => ps.Price)
                 .HasColumnName("Price")
                 .IsRequired();
+            builder.Property(ps => ps.Express)
+                .HasColumnName("Express");
+            builder.Property(ps => ps.Hide)
+                .HasColumnName("Hide");
+
         }
     }
 }

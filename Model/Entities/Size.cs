@@ -11,6 +11,9 @@ namespace Model.Entities {
         public string SizeValue { get; set; }
         [JsonIgnore]
         public virtual ICollection<ProductSize> ProductSizes { get; set; }
+        public int UserId { get; set; }
+        [JsonIgnore]
+        public virtual User User { get; set; }
 
     }
 }
