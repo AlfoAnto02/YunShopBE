@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class ProductService {
   private ProductsUrl = `${environment.baseURL}/Products`;
-  private ProductByIdUrl = `${environment.baseURL}/Products/getById`;
+  private ProductByIdUrl = `${environment.baseURL}/Products/byId`;
 
   constructor(private httpClient : HttpClient) { }
 

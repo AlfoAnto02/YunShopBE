@@ -27,7 +27,7 @@ namespace YunShopBE.Controllers {
             }
         }
 
-        [HttpGet("byId/{id:int}")]
+        [HttpGet("getById/{id:int}")]
         public async Task<IActionResult> GetByIdAsync(int id) {
             try
             {
