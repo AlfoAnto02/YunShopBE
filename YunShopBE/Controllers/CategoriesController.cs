@@ -11,7 +11,7 @@ using Model.Entities;
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoriesController : ControllerBase {
         public readonly ICategoryService _categoryService;
         public CategoriesController(ICategoryService categoryService) {
@@ -29,6 +29,7 @@ namespace YunShopBE.Controllers {
             }
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetCategories() {
             try {
                 var categories = await _categoryService.GetAllAsync();
@@ -40,6 +41,7 @@ namespace YunShopBE.Controllers {
             }
         }
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetCategoryById(int id) {
             try {
                 var category = await _categoryService.GetAsync(id);

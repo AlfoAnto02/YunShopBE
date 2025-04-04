@@ -2,11 +2,14 @@
 using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class BrandsController : ControllerBase {
         private readonly IBrandService _brandService;
         public BrandsController(IBrandService brandService) {
@@ -14,6 +17,7 @@ namespace YunShopBE.Controllers {
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllAsync() {
             try
             {

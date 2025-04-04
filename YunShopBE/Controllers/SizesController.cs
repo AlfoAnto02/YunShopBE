@@ -2,18 +2,22 @@
 using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace YunShopBE.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SizesController : ControllerBase{ 
         private readonly ISizeService _sizeService;
         public SizesController(ISizeService sizeService) {
             _sizeService = sizeService;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllAsync() {
             try {
                 var sizes = await _sizeService.GetAllAsync();

@@ -2,11 +2,14 @@
 using Application.Models.DTOs;
 using Application.Models.Request;
 using Application.Models.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace YunShopBE.Controllers {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductsController : ControllerBase {
         private readonly IProductService _productService;
         public ProductsController(IProductService productService) {
@@ -14,6 +17,7 @@ namespace YunShopBE.Controllers {
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllAsync() {
             try
             {
@@ -28,6 +32,7 @@ namespace YunShopBE.Controllers {
         }
 
         [HttpGet("getById/{id:int}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetByIdAsync(int id) {
             try
             {

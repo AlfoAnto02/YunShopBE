@@ -16,7 +16,8 @@
       "launchUrl": "",
       "applicationUrl": "http://localhost:5178",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "KEYVAULT_ENDPOINT": "https://yunshoputilitieskeys.vault.azure.net/"
       }
     },
     "https": {
