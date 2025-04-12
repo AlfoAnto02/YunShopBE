@@ -27,9 +27,15 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
+  <Target Name="PublishWebConfig" AfterTargets="Publish">
+    <Copy SourceFiles="wwwroot\web.config" DestinationFolder="$(PublishDir)" />
+  </Target>
 
-  <ItemGroup>
-    <Folder Include="ClientApp\" />
-  </ItemGroup>
+  <Target Name="CopyAngularFiles" AfterTargets="Publish">
+    <ItemGroup>
+      <AngularFiles Include="wwwroot\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AngularFiles)" DestinationFolder="$(PublishDir)\wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
 
 </Project>

@@ -4,20 +4,13 @@ namespace YunShopBE.Extensions {
     public static class MiddlewareExtension {
         public static WebApplication? AddWebMiddlewares(this WebApplication app) {
 
-            // 1. Reindirizzamento a HTTPS (opzionale)
             app.UseHttpsRedirection();
 
-            // 2. Servire i file statici (compreso index.html) dalla cartella di build Angular
-            app.UseDefaultFiles(new DefaultFilesOptions {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "yun-shop-fe", "browser"))
-            });
-            app.UseStaticFiles(new StaticFileOptions {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "yun-shop-fe", "browser"))
-            });
+            // Usa le configurazioni standard per i file statici in wwwroot
+            app.UseDefaultFiles(); // Serve index.html automaticamente
+            app.UseStaticFiles(); // Serve i file statici da wwwroot di default
 
-            // 3. (Opzionale) Configura Swagger
+            // Configura Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -25,20 +18,37 @@ namespace YunShopBE.Extensions {
                 c.RoutePrefix = "swagger";
             });
 
-            // 4. (Opzionale) CORS, Routing, Autenticazione, Autorizzazione
+            // Configurazione middleware
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // 5. Mappa i controller (API)
+            // Mappa i controller (API)
             app.MapControllers();
 
-            // 6. Mappa il fallback per qualsiasi rotta non trovata, reindirizzandola a index.html
-            app.MapFallbackToFile("index.html", new StaticFileOptions {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "yun-shop-fe", "browser"))
-            });
+            // Mappa il fallback per qualsiasi rotta non trovata, reindirizzandola a index.html
+            app.MapFallbackToFile("index.html");
 
+            // Configura headers per sicurezza e cache
+            app.Use(async (context, next) =>
+            {
+                // Evita che il browser faccia caching delle API
+                if (context.Request.Path.StartsWithSegments("/api")) {
+                    context.Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
+                    context.Response.Headers.Append("Pragma", "no-cache");
+                    context.Response.Headers.Append("Expires", "0");
+                }
+                // Permetti il caching per i file statici
+                else if (!context.Request.Path.StartsWithSegments("/api")) {
+                    // Un mese di cache per i file statici (eccetto index.html)
+                    if (!context.Request.Path.Value.EndsWith("/") &&
+                        !context.Request.Path.Value.EndsWith("index.html")) {
+                        context.Response.Headers.Append("Cache-Control", "public,max-age=2592000");
+                    }
+                }
+
+                await next();
+            });
 
             app.Run();
             return app;

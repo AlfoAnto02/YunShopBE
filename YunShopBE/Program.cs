@@ -16,7 +16,8 @@ using YunShopBE.Extensions;
 
 namespace YunShopBE {
     public class Program {
-        public static void Main(string[] args) {
+        public static void Main(string[] args)
+        {
             var builder = WebApplication.CreateBuilder(args);
             //var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("KEYVAULT_ENDPOINT"));
             //builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());

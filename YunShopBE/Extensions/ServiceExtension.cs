@@ -39,7 +39,7 @@ namespace YunShopBE.Extensions {
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                        .WithOrigins("http://localhost:4200")
+                        .WithOrigins("https://yunshop-hfhyhgegcjerb6d2.westeurope-01.azurewebsites.net/")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
