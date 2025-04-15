@@ -1,7 +1,7 @@
 export interface Size {
     id: number;
     sizeValue: string;
-    addedBy: number;
+    userId: number;
 }
 
 export interface addSizeRequest {

@@ -31,9 +31,10 @@ export class ProfileComponent implements OnInit {
     if (token) {
       const decodedPayload = this.tokenService.decodeToken(token);
       this.user = decodedPayload;
+      console.log('Decoded payload:', decodedPayload);
 
       this.username = this.user.username;
-      this.email = this.user.email;
+      this.email = this.user.Email;
 
       console.log('User profile loaded:', this.user);
     }

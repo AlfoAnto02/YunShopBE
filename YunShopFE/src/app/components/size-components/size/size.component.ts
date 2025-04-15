@@ -27,7 +27,7 @@ export class SizeComponent {
   }
 
   getAddedByUsername(): void {
-    this.userService.getUserById(this.size.addedBy).subscribe({
+    this.userService.getUserById(this.size.userId).subscribe({
       next: (response: any) => {
         this.addedByUsername = response.result.user.userName;
       },

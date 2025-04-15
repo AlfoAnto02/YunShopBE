@@ -12,7 +12,9 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 })
 export class ProductDetailComponent implements OnInit {
   productId: number = 0;
-  product: any = {};
+  product: any = {
+    imageUrls: []
+  };
   currentImageIndex: number = 0;
   constructor(private route: ActivatedRoute, private router: Router, private ProductService: ProductService) { }
 
@@ -27,7 +29,6 @@ export class ProductDetailComponent implements OnInit {
     this.ProductService.getProductById(id).subscribe({
       next: (response: any) => {
         this.product = response.result.product;
-        console.log('Product:', this.product);
       },
       error: (error: any) => {
         console.error('Error getting product:', error);
