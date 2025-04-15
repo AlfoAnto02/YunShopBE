@@ -7,7 +7,7 @@ namespace YunShopBE.Extensions {
     public static class ServiceExtension {
         public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration) {
             services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new() { Title = "YunShopBE", Version = "v1" });
@@ -39,7 +39,7 @@ namespace YunShopBE.Extensions {
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                        .WithOrigins("http://localhost:4200")
+                        .WithOrigins("https://yunshop-hfhyhgegcjerb6d2.italynorth-01.azurewebsites.net")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });

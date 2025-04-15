@@ -12,13 +12,14 @@
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseAuthentication();
-
+            app.MapControllers();
+            
             app.UseStaticFiles();
 
-            app.MapControllers();
+            app.MapFallbackToFile("index.html");
 
             app.Run();
             return app;

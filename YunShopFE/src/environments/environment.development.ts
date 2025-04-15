@@ -1,3 +1,3 @@
 export const environment = {
-    baseURL: 'http://localhost:5178/api/v1'
+    baseURL: 'https://yunshop-hfhyhgegcjerb6d2.italynorth-01.azurewebsites.net/api/v1'
 };
