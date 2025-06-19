@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { addProductRequest, deleteProductRequest, Product } from '../models/product';
+import { addProductRequest, updateProductRequest, deleteProductRequest, Product } from '../models/product';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -29,6 +29,13 @@ export class ProductService {
 
   addProduct(addProductRequest: addProductRequest): Observable<Product> {
     return this.httpClient.post<Product>(this.ProductsUrl, addProductRequest)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  updateProduct(updateProductRequest: updateProductRequest): Observable<Product> {
+    return this.httpClient.put<Product>(this.ProductsUrl, updateProductRequest)
       .pipe(
         catchError(this.handleError)
       );

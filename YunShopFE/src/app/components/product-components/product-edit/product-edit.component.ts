@@ -1,33 +1,41 @@
-import { Component, HostListener } from '@angular/core';
-import { addImageRequest, addProductRequest, addProductSizeRequest } from '../../../models/product';
-import { Router } from '@angular/router';
+import { Component, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
-import { TokenService } from '../../../services/token.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/category.service';
 import { BrandService } from '../../../services/brand.service';
-import { Brand } from '../../../models/brand';
 import { SizeService } from '../../../services/size.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { addImageRequest, addProductSizeRequest } from '../../../models/product';
+import { updateProductRequest } from '../../../models/product';
+import { Category } from '../../../models/category';
+import { Brand } from '../../../models/brand';
 import { Size } from '../../../models/size';
+import { TokenService } from '../../../services/token.service';
 
 @Component({
-  selector: 'app-new-product',
+  selector: 'app-product-edit',
   imports: [CommonModule, FormsModule],
-  templateUrl: './new-product.component.html',
-  styleUrl: './new-product.component.scss'
+  templateUrl: './product-edit.component.html',
+  styleUrl: './product-edit.component.scss'
 })
-export class NewProductComponent {
-  addProductRequest: addProductRequest = {
-    name: '',
-    description: '',
-    images: [],
-    categoryId: 0,
-    addedBy: 0,
-    brandId: 0,
-    sizes: []
+export class ProductEditComponent {
+  productId!: number;
+  product: any;
+
+  updateProductRequest: updateProductRequest = {
+    id: 0,
+    addProductRequest: {
+      name: '',
+      description: '',
+      images: [],
+      categoryId: 0,
+      addedBy: 0,
+      brandId: 0,
+      sizes: []
+    }
   };
+
   name: string = '';
   description: string = '';
   imageUrl: string = '';
@@ -41,9 +49,10 @@ export class NewProductComponent {
   brand: string = '';
   brands: Brand[] = [];
 
-  addProductSizeRequestBoxes: any[] = [
+  addProductSizeRequestBoxes: addProductSizeRequest[] = [
     {
-      sizeValue: 0,
+      sizeId: 0,
+      sizeValue: '',
       price: 0,
       stock: 0,
       express: false,
@@ -58,19 +67,67 @@ export class NewProductComponent {
   express: boolean = true;
   hide: boolean = false;
 
-
-  constructor(private router: Router, private ProductService: ProductService,
-    private TokenService: TokenService, private CategoryService: CategoryService,
-    private BrandService: BrandService, private SizeService: SizeService) { }
+  constructor(private route: ActivatedRoute, private ProductService: ProductService,
+    private router: Router, private CategoryService: CategoryService,
+    private BrandService: BrandService, private SizeService: SizeService,
+    private TokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.productId = idParam ? Number(idParam) : 0;
     this.loadFields();
+    this.getProduct(this.productId);
   }
 
   loadFields(): void {
     this.loadCategories();
     this.loadBrands();
     this.loadSizes();
+  }
+
+  getProduct(id: number): void {
+    this.ProductService.getProductById(id).subscribe({
+      next: (response: any) => {
+        this.product = response.result.product;
+        console.log('Product retrieved:', this.product);
+        this.name = this.product.name;
+        this.description = this.product.description;
+        this.category = this.product.categoryName;
+        this.brand = this.product.brandName;
+        this.populateImages();
+        this.populateProductSizes();
+      },
+      error: (error: any) => {
+        console.error('Error getting product:', error);
+      }
+    });
+  }
+
+  populateImages() {
+  if (this.product && Array.isArray(this.product.imageUrls)) {
+    this.product.imageUrls.forEach((url: string) => {
+      this.imageUrl = url;
+      this.addImageUrl();
+    });
+      this.imageUrl = '';
+    }
+  }
+
+  populateProductSizes() {
+    if (this.product && Array.isArray(this.product.sizes)) {
+      this.addProductSizeRequestBoxes = []; // Reset the array to avoid duplicates
+      this.product.sizes.forEach((size: any) => {
+        this.addProductSizeRequestBoxes.push({
+          sizeId: size.sizeId,
+          sizeValue: size.size,
+          price: size.price,
+          stock: size.stock,
+          express: size.express,
+          hide: size.hide
+        });
+      });
+    }
   }
 
   loadCategories(): void {
@@ -156,7 +213,44 @@ export class NewProductComponent {
     }
   }
 
-  getCategoryIdByName(name: string): number {
+  addNewItem(): void {
+    this.addProductSizeRequestBoxes.push({
+      sizeId: 0,
+      sizeValue: '',
+      price: 0,
+      stock: 0,
+      express: false,
+      hide: false
+    });
+  }
+
+  removeLastItem(): void {
+    if (this.addProductSizeRequestBoxes.length > 0) {
+      this.addProductSizeRequestBoxes.pop();
+    }
+  }
+
+  createAddProductSizeRequest(): addProductSizeRequest[] {
+    for (let i = 0; i < this.addProductSizeRequestBoxes.length; i++) {
+      if (this.validateaddProductSizeRequestBox(this.addProductSizeRequestBoxes[i])) {
+        this.productSizeRequests.push({
+          sizeId: this.getSizeIdByName(this.addProductSizeRequestBoxes[i].sizeValue),
+          sizeValue: this.addProductSizeRequestBoxes[i].sizeValue,
+          stock: this.addProductSizeRequestBoxes[i].stock,
+          price: this.addProductSizeRequestBoxes[i].price,
+          express: this.addProductSizeRequestBoxes[i].express,
+          hide: this.addProductSizeRequestBoxes[i].hide
+        });
+      } else {
+        console.error('Validation failed for box:', this.addProductSizeRequestBoxes[i]);
+        alert('Validation failed. Please check the input values.');
+        return this.productSizeRequests = [];
+      }
+    }
+    return this.productSizeRequests;
+  }
+
+   getCategoryIdByName(name: string): number {
     for (let i = 0; i < this.categories.length; i++) {
       if (this.categories[i].name === name) {
         console.log('Category ID:', this.categories[i].id);
@@ -202,95 +296,24 @@ export class NewProductComponent {
     return true;
   }
 
-  createAddProductSizeRequest(): addProductSizeRequest[] {
-    for (let i = 0; i < this.addProductSizeRequestBoxes.length; i++) {
-      if (this.validateaddProductSizeRequestBox(this.addProductSizeRequestBoxes[i])) {
-        this.productSizeRequests.push({
-          sizeId: this.getSizeIdByName(this.addProductSizeRequestBoxes[i].sizeValue),
-          sizeValue: this.addProductSizeRequestBoxes[i].sizeValue,
-          stock: this.addProductSizeRequestBoxes[i].stock,
-          price: this.addProductSizeRequestBoxes[i].price,
-          express: this.addProductSizeRequestBoxes[i].express,
-          hide: this.addProductSizeRequestBoxes[i].hide
-        });
-      } else {
-        console.error('Validation failed for box:', this.addProductSizeRequestBoxes[i]);
-        alert('Validation failed. Please check the input values.');
-        return this.productSizeRequests = [];
-      }
-    }
-    return this.productSizeRequests;
-  }
-
-  createAddProductRequest(): addProductRequest {
-    return {
-      name: this.name,
-      description: this.description,
-      images: this.images,
-      categoryId: this.getCategoryIdByName(this.category),
-      addedBy: this.TokenService.getUserIdByToken(),
-      brandId: this.getBrandIdByName(this.brand),
-      sizes: this.createAddProductSizeRequest()
-    };
-  }
-
   onSubmit() {
-    this.addProductRequest = this.createAddProductRequest();
-    this.ProductService.addProduct(this.addProductRequest)
-      .subscribe({
-        next: response => {
-          console.log('Product created successfully:', response);
-          alert('Product created successfully');
-          this.resetForm();
-          this.router.navigate(['/New-Product']);
-        },
-        error: error => {
-          console.error('Error creating product:', error);
-          alert('Error creating product: ' + (error.error?.message || 'Unknown error'));
-        }
-      });
+    this.updateProductRequest = this.createUpdateProductRequest();
+    console.log('Update Product Request:', this.updateProductRequest);
   }
 
-  addNewItem(): void {
-    this.addProductSizeRequestBoxes.push({
-      sizeId: 0,
-      price: 0,
-      stock: 0,
-      express: false,
-      hide: false
-    });
-  }
-
-  removeLastItem(): void {
-    if (this.addProductSizeRequestBoxes.length > 0) {
-      this.addProductSizeRequestBoxes.pop();
-    }
-  }
-
-  resetForm(): void {
-    this.name = '';
-    this.description = '';
-    this.imageUrl = '';
-    this.images = [];
-    this.category = '';
-    this.userId = 0;
-    this.brand = '';
-    this.productSizeRequests = [];
-    this.sizeValue = '';
-    this.addProductSizeRequestBoxes = [
-      {
-        sizeValue: '',
-        price: 0,
-        stock: 0,
-        express: false,
-        hide: false,
+  createUpdateProductRequest(): updateProductRequest {
+    return {
+      id: this.productId,
+      addProductRequest: {
+        name: this.name,
+        description: this.description,
+        images: this.images,
+        categoryId: this.getCategoryIdByName(this.category),
+        addedBy: this.TokenService.getUserIdByToken(),
+        brandId: this.getBrandIdByName(this.brand),
+        sizes: this.createAddProductSizeRequest()
       }
-    ];
-  }
-
-  @HostListener('document:keydown.escape', ['$event'])
-  handleEscape(event: KeyboardEvent) {
-    this.close();
+    };
   }
 
   close() {

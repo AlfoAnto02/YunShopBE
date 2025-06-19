@@ -21,6 +21,8 @@
             <div class="text-center">
                 <!-- View Details button -->
                 <a class="btn btn-outline-primary mt-auto action-button" [routerLink]="['/Products', product.id]">View Details</a>
+                <!-- Update button -->
+                <button class="btn btn-outline-primary mt-auto action-button" [routerLink]="['/Products', product.id, 'Edit']">Edit</button>
                 <!-- Delete button -->
                 <button class="btn btn-outline-danger mt-auto action-button" (click)="deleteProduct()">Delete</button>
             </div>

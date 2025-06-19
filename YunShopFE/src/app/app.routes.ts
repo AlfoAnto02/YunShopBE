@@ -13,6 +13,7 @@ import { NewSizeComponent } from './components/size-components/new-size/new-size
 import { SizesListComponent } from './components/size-components/sizes-list/sizes-list.component';
 import { BrandsListComponent } from './components/brand-components/brands-list/brands-list.component';
 import { ProductDetailComponent } from './components/product-components/product-detail/product-detail.component';
+import { ProductEditComponent } from './components/product-components/product-edit/product-edit.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'Products', component: ProductsListComponent },
     { path: 'New-Product', component: NewProductComponent, canActivate: [AuthGuard] },
     { path: 'Products/:id', component: ProductDetailComponent },
+    { path: 'Products/:id/Edit', component: ProductEditComponent, canActivate: [AuthGuard] },
     { path: 'Brands', component: BrandsListComponent },
     { path: 'New-Brand', component: NewBrandComponent, canActivate: [AuthGuard] },
     { path: 'Sizes', component: SizesListComponent },

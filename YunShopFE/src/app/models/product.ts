@@ -40,6 +40,7 @@ export interface addProductRequest {
 
 export interface addProductSizeRequest {
   sizeId: number;
+  sizeValue: string;
   stock: number;
   price: number;
   express: boolean;
@@ -53,4 +54,9 @@ export interface deleteProductRequest {
 
 export interface addImageRequest {
   url: string;
+}
+
+export interface updateProductRequest {
+  id: number;
+  addProductRequest: addProductRequest;
 }

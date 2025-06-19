@@ -1,0 +1,278 @@
+/* filepath: c:\Users\crist\source\repos\YunShopBE\YunShopFE\src\app\components\product-components\new-product\new-product.component.scss */
+/* Overlay per il popup */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  /* Sfondo semi-trasparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenitore della finestra modale */
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  width: 800px;
+  max-width: 100%;
+  position: relative;
+  height: 700px;
+  /* Altezza massima del contenitore */
+  overflow-y: auto;
+  /* Abilita lo scorrimento verticale */
+}
+
+/* Pulsante per chiudere la finestra modale */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Titolo del form */
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Stile per ogni gruppo di input */
+.input-group {
+  margin-bottom: 10px;
+  /* Ridotto lo spazio tra gli elementi del form */
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  /* Ridotto lo spazio tra l'etichetta e l'input */
+  color: #333;
+  text-align: center;
+  /* Centra il testo delle etichette */
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #8a4dff;
+  /* Colore viola al focus */
+}
+
+/* Pulsante di submit */
+.submit-btn,
+.add-url-btn {
+  background-color: #8a4dff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+/* Hover sul pulsante */
+.submit-btn:hover,
+.add-url-btn:hover {
+  background-color: #00b8f4;
+}
+
+.submit-btn:active,
+.add-url-btn:active {
+  background-color: #007bba;
+}
+
+/* Frase "Already signed up? Let’s get you back in!" */
+p {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  /* Colore grigio scuro per il testo principale */
+  margin-top: 20px;
+  /* Aggiungi spazio sopra */
+  margin-bottom: 10px;
+  /* Aggiungi spazio sotto */
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Transizione morbida per il colore e la trasformazione */
+}
+
+/* Stile del link SignIn */
+p .sign-in-link a {
+  color: #8a4dff;
+  /* Colore viola per il link */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Transizione morbida per il link */
+}
+
+p .sign-in-link a:hover {
+  color: #00b8f4;
+  /* Colore azzurro chiaro quando si passa sopra il link */
+  transform: translateX(5px);
+  /* Effetto di spostamento a destra durante hover */
+  text-decoration: underline;
+  /* Aggiungi l'underline al passaggio del mouse */
+}
+
+a {
+  text-decoration: none;
+  /* Rimuovi l'underline */
+  color: #8a4dff;
+  /* Colore del link */
+  cursor: pointer;
+  /* Mostra la manina quando il cursore è sopra il link */
+  transition: color 0.3s ease;
+  /* Aggiungi un effetto di transizione per il colore */
+}
+
+a:hover {
+  color: #00b8f4;
+  /* Cambia colore quando l'utente passa sopra il link */
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-btn {
+  grid-column: span 2;
+  justify-self: center;
+}
+
+/* Stile per il gruppo di input con tre colonne */
+.input-group.three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  grid-column: span 2;
+  /* Occupare l'intera larghezza del form */
+}
+
+/* Stile per la preview delle immagini */
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-preview img {
+  max-width: 100px;
+  max-height: 100px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group.full-width {
+  grid-column: span 2;
+  /* Occupare l'intera larghezza del form */
+}
+
+/* Stile per il pulsante centrato */
+.center-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Stile per i checkbox */
+.input-group.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra i checkbox e le etichette */
+}
+
+.input-group.checkbox-group label {
+  margin-bottom: 5px;
+  /* Spazio tra l'etichetta e il checkbox */
+}
+
+.input-group.checkbox-group input[type="checkbox"] {
+  margin-bottom: 10px;
+  /* Spazio tra i checkbox */
+}
+
+/* Stile per il contorno */
+.bordered-box {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Stile per il pulsante + */
+.plus-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.plus-button {
+  background-color: #00bb6d;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.minus-button {
+  background-color: #b92020;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plus-button:hover {
+  background-color: #00b8f4;
+}
+
+.minus-button:hover {
+  background-color: #e77021;
+}
+
+.plus-button:active {
+  background-color: #007bba;
+}
